@@ -6,13 +6,14 @@ import Login from "./pages/Login";
 import Plans from './components/Plans'
 import Footer from './components/Footer'
 import Error404 from "./pages/404";
+import Chatbot from "./components/Chatbot";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<div>
+        <Route path="/" element={<div className="flex flex-col min-h-screen">
           <Header />
           <main className="flex flex-1 justify-center px-4 sm:px-10 lg:px-40 py-5">
             <div className="layout-content-container flex flex-col w-full max-w-[960px]">
@@ -47,11 +48,18 @@ function App() {
 
         <Route path="/login" element={<Login />} />
 
-        <Route path="/plans" element={<div>
+        <Route path="/plans" element={<div className="flex flex-col min-h-screen">
           <Header/>
           <Plans/>
           <Footer/>
         </div>} />
+
+        <Route path="/chatbot" element={
+          <div>
+            <Header/>
+            <Chatbot/>
+          </div>
+        } />
 
         <Route path="*" element={<Error404/>} />
 
