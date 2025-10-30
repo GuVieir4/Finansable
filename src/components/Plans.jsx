@@ -13,7 +13,7 @@ function Plans() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-extrabold text-black dark:text-[#2E7D32] mb-4">
-              Escolha o plano certo para você
+              Escolha o plano certo para você!
             </h2>
             <p className="max-w-2xl mx-auto text-lg text-black/60 dark:text-[#2E7D32]">
               Controle suas finanças com a ferramenta perfeita para suas necessidades.

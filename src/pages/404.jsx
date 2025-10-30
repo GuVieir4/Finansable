@@ -1,8 +1,8 @@
 export default function Error404() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#4C6858] p-5 font-martian">
-      <div className="border border-[#38E07A] rounded-2xl w-full max-w-md h-[400px] p-8 flex flex-col justify-center items-center text-center bg-[#1a2b20]/80 backdrop-blur-md shadow-lg">
-        <h1 className="text-[#38E07A] text-[90px] font-extrabold w-full break-words drop-shadow-[0_0_10px_#38E07A]/30">
+      <div className="border border-[#38E07A] rounded-2xl w-full lg:max-w-[500px] p-8 flex flex-col justify-center items-center text-center bg-[#1a2b20] backdrop-blur-md shadow-lg">
+        <h1 className="text-[#38E07A] text-[90px] font-extrabold w-full break-words">
           404<span role="img" aria-label="thinking">🧐</span>
         </h1>
 
