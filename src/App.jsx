@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Header from "./components/Header";
 import FinancialSummary from "./components/FinancialSummary";
 import TransactionsTable from "./components/TransactionsTable";
@@ -7,9 +8,13 @@ import Plans from './components/Plans'
 import Footer from './components/Footer'
 import Error404 from "./pages/404";
 import Chatbot from "./components/Chatbot";
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Modal from "./components/Modal";
+import FormTransaction from "./components/FormTransaction"
 
 function App() {
+  const [openModal, setOpenModal] = useState(false);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -30,6 +35,12 @@ function App() {
 
               <FinancialSummary />
 
+              <div className="px-4 py-4">
+                <button onClick={() => setOpenModal(true)} className="bg-[#264533] text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+                  Adicionar Movimentação
+                </button>
+              </div>
+
               <h2 className="text-[#131711] text-[20px] sm:text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
                 Transações Recentes <i class="fa-solid fa-clock-rotate-left"></i>
               </h2>
@@ -41,6 +52,11 @@ function App() {
               </h2>
 
               <GoalsProgress />
+
+              <Modal isOpen={openModal} onClose={() =>setOpenModal(false)}>
+                <FormTransaction onClose={() =>setOpenModal(false)} />
+              </Modal>
+
             </div>
           </main>
           <Footer/>
