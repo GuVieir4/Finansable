@@ -1,0 +1,150 @@
+# Build outputs
+**/bin/
+**/obj/
+**/out/
+
+# NuGet packages
+*.nupkg
+**/packages/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# User-specific files
+*.user
+*.suo
+*.cache
+
+# Rider
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Coverage reports
+coverage/
+*.lcov
+
+# Dist folders
+dist/
+build/
+
+# Yarn
+.yarn/
+.yarnrc.yml
+
+# pnpm
+.pnpm-debug.log*
+
+# JetBrains Rider
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# NuGet
+.nuget/
+packages/
+*.nupkg
+
+# MSBuild
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# ClickOnce
+*.application
+*.manifest
+*.deploy
+
+# Publish
+publish/
+
+# Results
+TestResults/
+*.trx
+
+# Tools
+.tools/
+
+# Subversion
+.svn/
+
+# Mercurial
+.hg/
+
+# Git
+.git/
+
+# Project specific
+FinansableAPI/FinansableAPI/bin/
+FinansableAPI/FinansableAPI/obj/
+FinansableAPI/FinansableAPI.Application/bin/
+FinansableAPI/FinansableAPI.Application/obj/
+FinansableAPI/FinansableAPI.Core/bin/
+FinansableAPI/FinansableAPI.Core/obj/
+FinansableAPI/FinansableAPI.Infrastructure/bin/
+FinansableAPI/FinansableAPI.Infrastructure/obj/
