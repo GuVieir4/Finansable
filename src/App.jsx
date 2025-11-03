@@ -11,6 +11,7 @@ import Chatbot from "./components/Chatbot";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Modal from "./components/Modal";
 import FormTransaction from "./components/FormTransaction"
+import Transactions from "./pages/Transactions";
 
 function App() {
   const [openModal, setOpenModal] = useState(false);
@@ -78,6 +79,11 @@ function App() {
         } />
 
         <Route path="*" element={<Error404/>} />
+
+        <Route path="/transactions" element={<div>
+          <Header/>
+          <Transactions/>
+        </div>} />
 
       </Routes>
     </BrowserRouter>
