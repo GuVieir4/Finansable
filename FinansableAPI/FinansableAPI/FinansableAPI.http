@@ -1,0 +1,6 @@
+@FinansableAPI_HostAddress = http://localhost:5299
+
+GET {{FinansableAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
