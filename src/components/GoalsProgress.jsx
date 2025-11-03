@@ -1,17 +1,63 @@
+import { useState, useEffect } from 'react';
+import { getGoals } from '../api';
+
 function GoalsProgress() {
-  const goals = [
-    { titulo: "Economia para Viagem", progresso: 60, valor: "R$ 6.000 de R$ 10.000" },
-    { titulo: "Compra do Carro", progresso: 30, valor: "R$ 15.000 de R$ 50.000" },
-    { titulo: "Moto do Dan", progresso: 40, valor: "R$ 32.000 de R$ 80.000" },
-  ];
+  const [goals, setGoals] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchGoals = async () => {
+      try {
+        const apiData = await getGoals();
+        
+        const mappedGoals = apiData.map(item => {
+          const progresso = item.valorAlvo > 0 
+            ? Math.round((item.valorAtual / item.valorAlvo) * 100) 
+            : 0;
+
+          const valorFormatado = `R$ ${item.valorAtual.toLocaleString('pt-BR')} de R$ ${item.valorAlvo.toLocaleString('pt-BR')}`;
+
+          return {
+            titulo: item.nome,
+            progresso: progresso,
+            valor: valorFormatado
+          };
+        });
+
+        setGoals(mappedGoals);
+        setError(null);
+      } catch (error) {
+        console.error("Erro ao buscar metas:", error);
+        setError('Erro ao carregar as metas.');
+        setGoals([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchGoals();
+  }, []);
+
+  if (isLoading) {
+    return <p className="p-4">Carregando metas...</p>;
+  }
+
+  if (error) {
+    return <p className="p-4 text-red-600 font-medium">{error}</p>;
+  }
+  
+  if (goals.length === 0) {
+    return <p className="p-4">Nenhuma meta cadastrada, crie uma nova meta!</p>;
+  }
 
   return (
     <section>
       {goals.map((meta, index) => (
-        <div key={index} className="flex flex-col gap-3 p-4">
+        <div key={meta.titulo + index} className="flex flex-col gap-3 p-4 border-b border-gray-200">
           <div className="flex justify-between items-center gap-4 flex-wrap">
             <p className="text-[#131711] text-base sm:text-lg font-medium leading-normal"> {meta.titulo} </p>
-            <p className="text-[#131711] text-sm font-normal leading-normal"> {meta.progresso}% </p>
+            <p className="text-[#131711] text-sm font-normal leading-normal"> {meta.progresso}% </p> 
           </div>
           <div className="rounded bg-[#dee5dc] w-full">
             <div className="h-2 rounded bg-[#38E07A]" style={{ width: `${meta.progresso}%` }}></div>
