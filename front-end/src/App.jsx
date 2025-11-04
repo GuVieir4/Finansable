@@ -12,7 +12,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Modal from "./components/Modal";
 import FormTransaction from "./components/FormTransaction"
 import Transactions from "./pages/Transactions";
-import Goals from "./pages/goals";
+import Goals from "./pages/Goals";
 
 function App() {
   const [openModal, setOpenModal] = useState(false);
