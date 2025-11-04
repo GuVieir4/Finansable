@@ -12,6 +12,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Modal from "./components/Modal";
 import FormTransaction from "./components/FormTransaction"
 import Transactions from "./pages/Transactions";
+import Goals from "./pages/goals";
 
 function App() {
   const [openModal, setOpenModal] = useState(false);
@@ -83,7 +84,14 @@ function App() {
         <Route path="/transactions" element={<div>
           <Header/>
           <Transactions/>
+          <Footer/>
         </div>} />
+
+          <Route path="goals" element={<div>
+            <Header/>
+            <Goals/>
+            <Footer/>
+          </div>} />
 
       </Routes>
     </BrowserRouter>
