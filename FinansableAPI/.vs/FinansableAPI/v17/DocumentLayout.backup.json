@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\guvie\\Downloads\\Finansable-main\\Finansable-main\\FinansableAPI\\",
+  "WorkspaceRootPath": "C:\\Users\\guvie\\Music\\FrontFinansable\\FinansableAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2AA31AA4-7750-4760-A4E9-51C6C105393E}|FinansableAPI\\FinansableAPI.csproj|c:\\users\\guvie\\downloads\\finansable-main\\finansable-main\\finansableapi\\finansableapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{2AA31AA4-7750-4760-A4E9-51C6C105393E}|FinansableAPI\\FinansableAPI.csproj|c:\\users\\guvie\\music\\frontfinansable\\finansableapi\\finansableapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{2AA31AA4-7750-4760-A4E9-51C6C105393E}|FinansableAPI\\FinansableAPI.csproj|solutionrelative:finansableapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
@@ -56,11 +56,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\guvie\\Downloads\\Finansable-main\\Finansable-main\\FinansableAPI\\FinansableAPI\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\guvie\\Music\\FrontFinansable\\FinansableAPI\\FinansableAPI\\appsettings.json",
               "RelativeDocumentMoniker": "FinansableAPI\\appsettings.json",
-              "ToolTip": "C:\\Users\\guvie\\Downloads\\Finansable-main\\Finansable-main\\FinansableAPI\\FinansableAPI\\appsettings.json",
+              "ToolTip": "C:\\Users\\guvie\\Music\\FrontFinansable\\FinansableAPI\\FinansableAPI\\appsettings.json",
               "RelativeToolTip": "FinansableAPI\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-10-28T22:42:38.031Z",
               "EditorCaption": ""

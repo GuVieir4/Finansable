@@ -506,7 +506,8 @@
           },
           "dataFim": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "usuarioId": {
             "type": "integer",
@@ -619,7 +620,8 @@
           },
           "dataFim": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "usuarioId": {
             "type": "integer",

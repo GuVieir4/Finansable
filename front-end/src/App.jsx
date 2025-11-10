@@ -49,10 +49,6 @@ function App() {
 
               <TransactionsTable />
 
-              <h2 className="text-[#131711] text-[20px] sm:text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
-                Progresso nas Metas <i class="fa-solid fa-bullseye"></i>
-              </h2>
-
               <GoalsProgress />
 
               <Modal isOpen={openModal} onClose={() =>setOpenModal(false)}>
