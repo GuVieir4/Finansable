@@ -1,9 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\guvie\\Music\\FrontFinansable\\FinansableAPI\\",
+  "WorkspaceRootPath": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2AA31AA4-7750-4760-A4E9-51C6C105393E}|FinansableAPI\\FinansableAPI.csproj|c:\\users\\guvie\\music\\frontfinansable\\finansableapi\\finansableapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{BF8B0679-6E65-40C8-93CE-8FE4BF40C10C}|FinansableAPI.Core\\FinansableAPI.Core.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi.core\\entities\\mensagem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BF8B0679-6E65-40C8-93CE-8FE4BF40C10C}|FinansableAPI.Core\\FinansableAPI.Core.csproj|solutionrelative:finansableapi.core\\entities\\mensagem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B784D672-8F85-4D8A-A30A-449C3CD00D64}|FinansableAPI.Application\\FinansableAPI.Application.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi.application\\dtos\\transacaodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B784D672-8F85-4D8A-A30A-449C3CD00D64}|FinansableAPI.Application\\FinansableAPI.Application.csproj|solutionrelative:finansableapi.application\\dtos\\transacaodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AA31AA4-7750-4760-A4E9-51C6C105393E}|FinansableAPI\\FinansableAPI.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{2AA31AA4-7750-4760-A4E9-51C6C105393E}|FinansableAPI\\FinansableAPI.csproj|solutionrelative:finansableapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
@@ -14,51 +22,41 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:133:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:131:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:132:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Mensagem.cs",
+              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Core\\Entities\\Mensagem.cs",
+              "RelativeDocumentMoniker": "FinansableAPI.Core\\Entities\\Mensagem.cs",
+              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Core\\Entities\\Mensagem.cs*",
+              "RelativeToolTip": "FinansableAPI.Core\\Entities\\Mensagem.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T17:16:45.908Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TransacaoDTO.cs",
+              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Application\\DTOs\\TransacaoDTO.cs",
+              "RelativeDocumentMoniker": "FinansableAPI.Application\\DTOs\\TransacaoDTO.cs",
+              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Application\\DTOs\\TransacaoDTO.cs",
+              "RelativeToolTip": "FinansableAPI.Application\\DTOs\\TransacaoDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T17:13:53.761Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\guvie\\Music\\FrontFinansable\\FinansableAPI\\FinansableAPI\\appsettings.json",
+              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI\\appsettings.json",
               "RelativeDocumentMoniker": "FinansableAPI\\appsettings.json",
-              "ToolTip": "C:\\Users\\guvie\\Music\\FrontFinansable\\FinansableAPI\\FinansableAPI\\appsettings.json",
+              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI\\appsettings.json",
               "RelativeToolTip": "FinansableAPI\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",

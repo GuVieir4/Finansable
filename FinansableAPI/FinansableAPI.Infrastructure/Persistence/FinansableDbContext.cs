@@ -13,6 +13,7 @@ namespace FinansableAPI.Infrastructure.Persistence
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Poupanca> Poupancas { get; set; }
         public DbSet<Transacao> Transacoes { get; set; }
+        public DbSet<Mensagem> Mensagens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

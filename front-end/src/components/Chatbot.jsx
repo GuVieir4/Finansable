@@ -1,27 +1,65 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Chatbot() {
-  const [messages, setMessages] = useState([
-    { from: "bot", text: "Olá! Como posso ajudar você hoje com suas finanças?" },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [usuarioId] = useState(1);
 
-  const handleSend = () => {
+  useEffect(() => {
+    async function fetchMensagens() {
+      try {
+        const response = await fetch(`https://localhost:5001/api/mensagem/${usuarioId}`);
+        if (!response.ok) throw new Error("Erro ao buscar mensagens");
+        const data = await response.json();
+
+        const mensagensFormatadas = data.map((m) => ({
+          from: m.direcao === 1 ? "user" : "bot",
+          text: m.texto,
+        }));
+
+        setMessages(mensagensFormatadas);
+      } catch (error) {
+        console.error("Erro:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchMensagens();
+  }, [usuarioId]);
+
+  const handleSend = async () => {
     if (!input.trim()) return;
 
-    const newMessages = [...messages, { from: "user", text: input }];
-    setMessages(newMessages);
+    const userMessage = { from: "user", text: input };
+    setMessages((prev) => [...prev, userMessage]);
     setInput("");
 
-    setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        {
+    try {
+      const response = await fetch("https://localhost:5001/api/mensagem", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          texto: input,
+          direcao: 1,
+          usuarioId: usuarioId,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Erro ao enviar mensagem");
+      const savedMessage = await response.json();
+
+      setTimeout(() => {
+        const botMessage = {
           from: "bot",
           text: "Entendi! Posso te mostrar um resumo dos seus gastos mensais se quiser 😊",
-        },
-      ]);
-    }, 600);
+        };
+        setMessages((prev) => [...prev, botMessage]);
+      }, 600);
+    } catch (error) {
+      console.error("Erro:", error);
+    }
   };
 
   return (
@@ -32,60 +70,79 @@ function Chatbot() {
             Chatbot Financeiro
           </h1>
 
-          {/* Os ifs são pra definir as classes dependendo de quem mandou a mensagem*/}
-          <div className="flex flex-col gap-4">
-            {messages.map((message, i) => (
-              <div key={i} className={`flex items-end gap-3 p-2 ${message.from === "user" ? "justify-end" : ""}`}>
-                {message.from === "bot" && (
+          {loading ? (
+            <p className="text-[#264532] text-center mt-10">Carregando mensagens...</p>
+          ) : (
+            <div className="flex flex-col gap-4">
+              {messages.map((message, i) => (
+                <div
+                  key={i}
+                  className={`flex items-end gap-3 p-2 ${
+                    message.from === "user" ? "justify-end" : ""
+                  }`}
+                >
+                  {message.from === "bot" && (
+                    <div
+                      className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 shrink-0"
+                      style={{ backgroundImage: `url(/porquinho.png)` }}
+                    ></div>
+                  )}
+
                   <div
-                    className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 shrink-0"
-                    style={{ backgroundImage: `url(/porquinho.png)` }}>
-                </div>
-                )}
-
-                <div className={`flex flex-col gap-1 ${message.from === "user" ? "items-end" : "items-start"}`}>
-                    {/* Definindo a cor de como aparece o nome de quem mandou a mensagem */}
-                  <p className={`text-[13px] font-normal leading-normal max-w-[360px] ${
-                      message.from === "bot"
-                        ? "text-[#264532] font-semibold"
-                        : "text-[#000000] text-right font-semibold"
-                    }`}>
-                    {/* Definindo o nome de quem mandou a mensagem */}
-                    {message.from === "bot" ? "Finansable Bot" : "Você"}
-                  </p>
-                    <p
-                    // Definindo a cor do balão de mensagem e cor do texto dependendo de quem mandou a mensagem
-                    className={`text-base font-normal leading-normal max-w-[260px] lg:max-w-[400px] rounded-lg px-4 py-3 break-words ${
-                        message.from === "bot"
-                        ? "bg-[#264532] text-white"
-                        : "bg-[#4CAF50] text-[#000000]"
+                    className={`flex flex-col gap-1 ${
+                      message.from === "user" ? "items-end" : "items-start"
                     }`}
+                  >
+                    <p
+                      className={`text-[13px] font-normal leading-normal max-w-[360px] ${
+                        message.from === "bot"
+                          ? "text-[#264532] font-semibold"
+                          : "text-[#000000] text-right font-semibold"
+                      }`}
                     >
-                    {/* Mensagem que foi enviada */}
-                    {message.text}
+                      {message.from === "bot" ? "Finansable Bot" : "Você"}
                     </p>
-                </div>
-
-                {/* Colocando a minha foto, se foi eu que enviei a mensagem */}
-                {message.from === "user" && (
-                  <div className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 shrink-0"
-                    style={{ backgroundImage: 'url("https://avatars.githubusercontent.com/u/160288170?v=4")' }}>
+                    <p
+                      className={`text-base font-normal leading-normal max-w-[260px] lg:max-w-[400px] rounded-lg px-4 py-3 break-words ${
+                        message.from === "bot"
+                          ? "bg-[#264532] text-white"
+                          : "bg-[#4CAF50] text-[#000000]"
+                      }`}
+                    >
+                      {message.text}
+                    </p>
                   </div>
-                )}
-              </div>
-            ))}
-          </div>
+
+                  {message.from === "user" && (
+                    <div
+                      className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 shrink-0"
+                      style={{
+                        backgroundImage:
+                          'url("https://avatars.githubusercontent.com/u/160288170?v=4")',
+                      }}
+                    ></div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Campo de enviar a mensagem / Input */}
       <div className="w-full border-t border-[#264532] flex items-center justify-center p-4">
         <div className="w-full max-w-[960px] flex gap-2">
-          <input type="text" placeholder="Digite sua pergunta..." value={input}
+          <input
+            type="text"
+            placeholder="Digite sua pergunta..."
+            value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
-            className="flex-1 h-12 px-4 rounded-lg text-white bg-[#264532] focus:outline-none placeholder:text-[#96c5a9]"/>
-          <button onClick={handleSend} className="h-12 px-6 rounded-lg bg-[#38e07b] text-[#122118] font-medium hover:bg-[#2ed06f] transition">
+            className="flex-1 h-12 px-4 rounded-lg text-white bg-[#264532] focus:outline-none placeholder:text-[#96c5a9]"
+          />
+          <button
+            onClick={handleSend}
+            className="h-12 px-6 rounded-lg bg-[#38e07b] text-[#122118] font-medium hover:bg-[#2ed06f] transition"
+          >
             Enviar
           </button>
         </div>

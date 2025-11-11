@@ -484,3 +484,14 @@ C:\Users\guvie\Music\FrontFinansable\FinansableAPI\FinansableAPI\obj\Debug\net8.
 C:\Users\guvie\Music\FrontFinansable\FinansableAPI\FinansableAPI\obj\Debug\net8.0\FinansableAPI.pdb
 C:\Users\guvie\Music\FrontFinansable\FinansableAPI\FinansableAPI\obj\Debug\net8.0\FinansableAPI.genruntimeconfig.cache
 C:\Users\guvie\Music\FrontFinansable\FinansableAPI\FinansableAPI\obj\Debug\net8.0\ref\FinansableAPI.dll
+C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI\obj\Debug\net8.0\FinansableAPI.csproj.AssemblyReference.cache
+C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI\obj\Debug\net8.0\FinansableAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI\obj\Debug\net8.0\FinansableAPI.AssemblyInfoInputs.cache
+C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI\obj\Debug\net8.0\FinansableAPI.AssemblyInfo.cs
+C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI\obj\Debug\net8.0\FinansableAPI.csproj.CoreCompileInputs.cache
+C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI\obj\Debug\net8.0\FinansableAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI\obj\Debug\net8.0\FinansableAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI\obj\Debug\net8.0\FinansableAPI.sourcelink.json
+C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI\obj\Debug\net8.0\FinansableAPI.dll
+C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI\obj\Debug\net8.0\refint\FinansableAPI.dll
+C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI\obj\Debug\net8.0\FinansableAPI.pdb
