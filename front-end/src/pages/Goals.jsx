@@ -1,18 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PlusCircle, CalendarDays, Pencil, Trash2 } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import Modal from "../components/Modal";
+import { getGoals, createGoal, deleteGoal, updateGoal } from "../api";
 
 function Goals() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingGoalIndex, setEditingGoalIndex] = useState(null);
+  const [goals, setGoals] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const [goals, setGoals] = useState([
-    { title: "Guardar para viagem", target: 3000, progress: 1800, deadline: "2025-12-30" },
-    { title: "Quitar cartão de crédito", target: 2000, progress: 1500, deadline: "2025-11-20" },
-    { title: "Reserva de emergência", target: 5000, progress: 2200, deadline: "2026-03-15" },
-  ]);
+  useEffect(() => {
+    const fetchGoals = async () => {
+      const userId = localStorage.getItem('userId');
+      if (!userId) {
+        setError('Usuário não autenticado.');
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const apiData = await getGoals(userId);
+        const mappedGoals = apiData.map(item => ({
+          id: item.id,
+          title: item.nome,
+          target: item.valorAlvo,
+          progress: item.valorAtual,
+          deadline: item.dataFim || 'Indeterminado'
+        }));
+        setGoals(mappedGoals);
+        setError(null);
+      } catch (error) {
+        console.error("Erro ao buscar metas:", error);
+        setError('Erro ao carregar as metas.');
+        setGoals([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchGoals();
+  }, []);
 
   const [newTitle, setNewTitle] = useState("");
   const [newTarget, setNewTarget] = useState("");
@@ -28,24 +58,44 @@ function Goals() {
   const totalPercent = totalTarget === 0 ? 0 : Math.round((totalProgress / totalTarget) * 100);
   const COLORS = ["#4CAF50", "#C8E6C9"];
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
     const parsedTarget = parseFloat(String(newTarget).replace(",", "."));
     if (!newTitle.trim() || !parsedTarget || parsedTarget <= 0 || !newDeadline.trim()) {
       alert("Preencha todos os campos corretamente!");
       return;
     }
-    const newGoal = {
-      title: newTitle.trim(),
-      target: parsedTarget,
-      progress: 0,
-      deadline: newDeadline,
-    };
-    setGoals((prev) => [newGoal, ...prev]);
-    setNewTitle("");
-    setNewTarget("");
-    setNewDeadline("");
-    setIsModalOpen(false);
+
+    try {
+      const userId = localStorage.getItem('userId');
+      const goalData = {
+        nome: newTitle.trim(),
+        valorAlvo: parsedTarget,
+        valorAtual: 0,
+        dataFim: newDeadline,
+        usuarioId: parseInt(userId)
+      };
+
+      const createdGoal = await createGoal(goalData);
+      const mappedGoal = {
+        id: createdGoal.id,
+        title: createdGoal.nome,
+        target: createdGoal.valorAlvo,
+        progress: createdGoal.valorAtual,
+        deadline: createdGoal.dataFim || 'Indeterminado'
+      };
+
+      setGoals((prev) => [mappedGoal, ...prev]);
+      setNewTitle("");
+      setNewTarget("");
+      setNewDeadline("");
+      setIsModalOpen(false);
+      // Notify dashboard to recalculate happiness
+      window.dispatchEvent(new CustomEvent('goalsUpdated'));
+    } catch (error) {
+      console.error("Erro ao criar meta:", error);
+      alert("Erro ao criar meta. Tente novamente.");
+    }
   };
 
   const openEditModal = (index) => {
@@ -58,7 +108,7 @@ function Goals() {
     setIsEditModalOpen(true);
   };
 
-  const handleEditSave = (e) => {
+  const handleEditSave = async (e) => {
     e.preventDefault();
     const parsedTarget = parseFloat(String(editTarget).replace(",", "."));
     const parsedProgress = parseFloat(String(editProgress).replace(",", "."));
@@ -66,20 +116,52 @@ function Goals() {
       alert("Preencha todos os campos corretamente!");
       return;
     }
-    setGoals((prev) =>
-      prev.map((g, i) =>
-        i === editingGoalIndex
-          ? { ...g, title: editTitle, target: parsedTarget, progress: parsedProgress, deadline: editDeadline }
-          : g
-      )
-    );
-    setIsEditModalOpen(false);
+
+    try {
+      const userId = localStorage.getItem('userId');
+      const goalId = goals[editingGoalIndex].id;
+      const updateData = {
+        nome: editTitle.trim(),
+        valorAtual: parsedProgress,
+        valorAlvo: parsedTarget,
+        dataInicio: new Date().toISOString(),
+        dataFim: new Date(editDeadline).toISOString(),
+        usuarioId: parseInt(userId)
+      };
+
+      await updateGoal(goalId, updateData);
+
+      // Update local state
+      setGoals((prev) =>
+        prev.map((g, i) =>
+          i === editingGoalIndex
+            ? { ...g, title: editTitle, target: parsedTarget, progress: parsedProgress, deadline: editDeadline }
+            : g
+        )
+      );
+
+      setIsEditModalOpen(false);
+      // Notify dashboard to recalculate happiness
+      window.dispatchEvent(new CustomEvent('goalsUpdated'));
+    } catch (error) {
+      console.error("Erro ao editar meta:", error);
+      alert("Erro ao editar meta. Tente novamente.");
+    }
   };
 
-  const handleDelete = (index) => {
+  const handleDelete = async (index) => {
     const confirmDelete = window.confirm("Tem certeza que deseja excluir esta meta?");
     if (confirmDelete) {
-      setGoals((prev) => prev.filter((_, i) => i !== index));
+      try {
+        const goalId = goals[index].id;
+        await deleteGoal(goalId);
+        setGoals((prev) => prev.filter((_, i) => i !== index));
+        // Notify dashboard to recalculate happiness
+        window.dispatchEvent(new CustomEvent('goalsUpdated'));
+      } catch (error) {
+        console.error("Erro ao excluir meta:", error);
+        alert("Erro ao excluir meta. Tente novamente.");
+      }
     }
   };
 
@@ -159,9 +241,9 @@ function Goals() {
                         <CalendarDays size={14} />
                         <span>
                           Prazo:{" "}
-                          {new Date(goal.deadline).toLocaleDateString("pt-BR", {
-                            timeZone: "UTC",
-                          })}
+                          {goal.deadline && goal.deadline !== 'Indeterminado' && !isNaN(new Date(goal.deadline))
+                            ? new Date(goal.deadline).toLocaleDateString("pt-BR", { timeZone: "UTC" })
+                            : goal.deadline || 'Indeterminado'}
                         </span>
                       </div>
                     </div>

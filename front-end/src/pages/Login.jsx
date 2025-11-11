@@ -1,29 +1,49 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { login } from "../api";
 
 export default function Login() {
-  const users = [
-    { user: "Gustavo", email: "1992080@unimar.br", senha: "unimar" },
-  ];
-
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [setErro] = useState("");
+  const [erro, setErro] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setErro("");
 
-    const userEncontrado = users.find(
-      (user) => user.email === email && user.senha === senha
-    );
+    console.log("🚀 Starting login process");
+    console.log("📧 Email:", email);
+    console.log("🔒 Password:", senha ? "***" : "empty");
 
-    if (userEncontrado) {
-      setErro("");
-      navigate("/");
-    } else {
+    try {
+      const response = await login(email, senha);
+      console.log("💾 Storing session data");
+      console.log("🔍 Full response:", response);
+      console.log("🔍 Token:", response.token);
+      console.log("🔍 Usuario object:", JSON.stringify(response.usuario, null, 2));
+      console.log("🔍 Usuario ID:", response.usuario?.Id);
+      console.log("🔍 Usuario id (lowercase):", response.usuario?.id);
+
+      const userId = response.usuario?.Id || response.usuario?.id;
+      if (response.token && userId) {
+        localStorage.setItem('authToken', response.token);
+        localStorage.setItem('userId', userId.toString());
+        localStorage.setItem('user', JSON.stringify(response.usuario));
+        console.log("✅ Login successful, redirecting to /");
+        navigate("/");
+      } else {
+        console.error("❌ Invalid response structure - missing token or userId:", { token: !!response.token, userId: userId });
+        setErro("Resposta inválida do servidor.");
+      }
+    } catch (error) {
+      console.error("❌ Login failed:", error);
       setErro("Email ou senha incorretos.");
-      alert("Email ou senha incorretos.")
+      alert("Email ou senha incorretos.");
+    } finally {
+      setLoading(false);
     }
   };
 

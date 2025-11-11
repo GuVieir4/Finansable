@@ -1,6 +1,7 @@
 using FinansableAPI.Application.DTOs;
 using FinansableAPI.Application.Interfaces;
 using FinansableAPI.Core.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinansableAPI.Controllers
@@ -23,6 +24,7 @@ namespace FinansableAPI.Controllers
             return Ok(transacoes);
         }
 
+        [Authorize]
         [HttpGet("usuario/{usuarioId}")]
         public async Task<IActionResult> GetByUsuarioId(int usuarioId)
         {
@@ -30,6 +32,7 @@ namespace FinansableAPI.Controllers
             return Ok(transacoes);
         }
 
+        [Authorize]
         [HttpGet("dashboard/{usuarioId}")]
         public async Task<IActionResult> GetDashboardData(int usuarioId)
         {

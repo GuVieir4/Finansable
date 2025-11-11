@@ -23,6 +23,13 @@ export default function Header() {
     setMenuOpen(false);
   }
 
+  function handleLogout() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('user');
+    window.location.href = '/login';
+  }
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -141,7 +148,7 @@ export default function Header() {
                 <button className="flex items-center gap-2 w-full px-4 py-2 text-[#264533] hover:bg-[#f0fdf4] transition-colors">
                   <Settings className="w-4 h-4 text-[#2d6a4f]" /> Configurações
                 </button>
-                <button className="flex items-center gap-2 w-full px-4 py-2 text-[#c92a2a] hover:bg-red-50 transition-colors">
+                <button onClick={handleLogout} className="flex items-center gap-2 w-full px-4 py-2 text-[#c92a2a] hover:bg-red-50 transition-colors">
                   <LogOut className="w-4 h-4 text-[#c92a2a]" /> Sair
                 </button>
               </motion.div>
@@ -179,7 +186,7 @@ export default function Header() {
             <button className="flex items-center gap-2 px-3 py-1 text-[#264533] bg-[#f0fdf4] rounded-lg hover:bg-[#e4f6eb] transition-all text-sm">
               <Settings className="w-4 h-4 text-[#2d6a4f]" /> Configurações
             </button>
-            <button className="flex items-center gap-2 px-3 py-1 text-[#c92a2a] bg-red-50 rounded-lg hover:bg-red-100 transition-all text-sm">
+            <button onClick={handleLogout} className="flex items-center gap-2 px-3 py-1 text-[#c92a2a] bg-red-50 rounded-lg hover:bg-red-100 transition-all text-sm">
               <LogOut className="w-4 h-4 text-[#c92a2a]" /> Sair
             </button>
           </div>
