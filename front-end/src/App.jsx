@@ -103,7 +103,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ProtectedRoute><div className="flex flex-col min-h-screen">
+        <Route path="/" element={<ProtectedRoute><div className="flex flex-col min-h-screen animate-fade-in">
           <Header />
           <main className="flex flex-1 justify-center px-4 sm:px-10 lg:px-40 py-5">
             <div className="layout-content-container flex flex-col w-full max-w-[960px]">

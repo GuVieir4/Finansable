@@ -93,12 +93,12 @@ function GoalsProgress() {
     try {
       const userId = localStorage.getItem('userId');
       const updateData = {
-        nome: editForm.nome,
-        valorAtual: parseFloat(editForm.valorAtual.replace(',', '.')),
-        valorAlvo: parseFloat(editForm.valorAlvo.replace(',', '.')),
-        dataInicio: new Date().toISOString(),
-        dataFim: editForm.dataFim ? new Date(editForm.dataFim).toISOString() : null,
-        usuarioId: parseInt(userId)
+        Nome: editForm.nome,
+        ValorAtual: parseFloat(editForm.valorAtual.replace(',', '.')),
+        ValorAlvo: parseFloat(editForm.valorAlvo.replace(',', '.')),
+        DataInicio: new Date().toISOString(),
+        DataFim: editForm.dataFim ? new Date(editForm.dataFim).toISOString() : null,
+        UsuarioId: parseInt(userId)
       };
 
       await updateGoal(editingGoalId, updateData);
