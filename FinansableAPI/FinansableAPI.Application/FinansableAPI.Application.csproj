@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FinansableAPI.Core\FinansableAPI.Core.csproj" />
+    <ProjectReference Include="..\FinansableAPI.Infrastructure\FinansableAPI.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

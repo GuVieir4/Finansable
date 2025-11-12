@@ -2,7 +2,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FinansableAPI.Core\FinansableAPI.Core.csproj" />
-    <ProjectReference Include="..\FinansableAPI.Application\FinansableAPI.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

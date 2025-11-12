@@ -3,20 +3,44 @@
   "WorkspaceRootPath": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi.infrastructure\\persistence\\finansabledbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|solutionrelative:finansableapi.infrastructure\\persistence\\finansabledbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2AA31AA4-7750-4760-A4E9-51C6C105393E}|FinansableAPI\\FinansableAPI.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{2AA31AA4-7750-4760-A4E9-51C6C105393E}|FinansableAPI\\FinansableAPI.csproj|solutionrelative:finansableapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi.infrastructure\\persistence\\repositories\\poupancarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|solutionrelative:finansableapi.infrastructure\\persistence\\repositories\\poupancarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi.infrastructure\\persistence\\repositories\\transacaorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|solutionrelative:finansableapi.infrastructure\\persistence\\repositories\\transacaorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B784D672-8F85-4D8A-A30A-449C3CD00D64}|FinansableAPI.Application\\FinansableAPI.Application.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi.application\\services\\mensagemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B784D672-8F85-4D8A-A30A-449C3CD00D64}|FinansableAPI.Application\\FinansableAPI.Application.csproj|solutionrelative:finansableapi.application\\services\\mensagemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi.infrastructure\\finansableapi.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|solutionrelative:finansableapi.infrastructure\\finansableapi.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi.infrastructure\\persistence\\repositories\\mensagemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|solutionrelative:finansableapi.infrastructure\\persistence\\repositories\\mensagemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi.infrastructure\\persistence\\repositories\\usuariorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|solutionrelative:finansableapi.infrastructure\\persistence\\repositories\\usuariorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B784D672-8F85-4D8A-A30A-449C3CD00D64}|FinansableAPI.Application\\FinansableAPI.Application.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi.application\\finansableapi.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{B784D672-8F85-4D8A-A30A-449C3CD00D64}|FinansableAPI.Application\\FinansableAPI.Application.csproj|solutionrelative:finansableapi.application\\finansableapi.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi.infrastructure\\persistence\\repositories\\mensagemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|solutionrelative:finansableapi.infrastructure\\persistence\\repositories\\mensagemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BF8B0679-6E65-40C8-93CE-8FE4BF40C10C}|FinansableAPI.Core\\FinansableAPI.Core.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi.core\\finansableapi.core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{BF8B0679-6E65-40C8-93CE-8FE4BF40C10C}|FinansableAPI.Core\\FinansableAPI.Core.csproj|solutionrelative:finansableapi.core\\finansableapi.core.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi.infrastructure\\finansableapi.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{64C72323-A9FC-4F22-A4F5-05616D501880}|FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj|solutionrelative:finansableapi.infrastructure\\finansableapi.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2AA31AA4-7750-4760-A4E9-51C6C105393E}|FinansableAPI\\FinansableAPI.csproj|c:\\downloads\\frontfinansable\\finansableapi\\finansableapi\\controllers\\mensagemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,37 +58,120 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FinansableAPI.Infrastructure",
-              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj",
-              "RelativeDocumentMoniker": "FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj",
-              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj",
-              "RelativeToolTip": "FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-11-11T18:54:27.053Z",
+              "DocumentIndex": 0,
+              "Title": "FinansableDbContext.cs",
+              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\Persistence\\FinansableDbContext.cs",
+              "RelativeDocumentMoniker": "FinansableAPI.Infrastructure\\Persistence\\FinansableDbContext.cs",
+              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\Persistence\\FinansableDbContext.cs",
+              "RelativeToolTip": "FinansableAPI.Infrastructure\\Persistence\\FinansableDbContext.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAcwDUAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T15:05:50.072Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "FinansableAPI\\appsettings.json",
+              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI\\appsettings.json",
+              "RelativeToolTip": "FinansableAPI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-12T15:04:17.844Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UsuarioRepository.cs",
+              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\Persistence\\Repositories\\UsuarioRepository.cs",
+              "RelativeDocumentMoniker": "FinansableAPI.Infrastructure\\Persistence\\Repositories\\UsuarioRepository.cs",
+              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\Persistence\\Repositories\\UsuarioRepository.cs",
+              "RelativeToolTip": "FinansableAPI.Infrastructure\\Persistence\\Repositories\\UsuarioRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T11:39:06.095Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TransacaoRepository.cs",
+              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\Persistence\\Repositories\\TransacaoRepository.cs",
+              "RelativeDocumentMoniker": "FinansableAPI.Infrastructure\\Persistence\\Repositories\\TransacaoRepository.cs",
+              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\Persistence\\Repositories\\TransacaoRepository.cs",
+              "RelativeToolTip": "FinansableAPI.Infrastructure\\Persistence\\Repositories\\TransacaoRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T11:39:03.602Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "FinansableAPI.Application",
-              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Application\\FinansableAPI.Application.csproj",
-              "RelativeDocumentMoniker": "FinansableAPI.Application\\FinansableAPI.Application.csproj",
-              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Application\\FinansableAPI.Application.csproj",
-              "RelativeToolTip": "FinansableAPI.Application\\FinansableAPI.Application.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-11-11T18:50:09.161Z",
-              "EditorCaption": ""
+              "Title": "PoupancaRepository.cs",
+              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\Persistence\\Repositories\\PoupancaRepository.cs",
+              "RelativeDocumentMoniker": "FinansableAPI.Infrastructure\\Persistence\\Repositories\\PoupancaRepository.cs",
+              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\Persistence\\Repositories\\PoupancaRepository.cs",
+              "RelativeToolTip": "FinansableAPI.Infrastructure\\Persistence\\Repositories\\PoupancaRepository.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA1wBEAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T11:39:00.966Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MensagemRepository.cs",
+              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\Persistence\\Repositories\\MensagemRepository.cs",
+              "RelativeDocumentMoniker": "FinansableAPI.Infrastructure\\Persistence\\Repositories\\MensagemRepository.cs",
+              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\Persistence\\Repositories\\MensagemRepository.cs",
+              "RelativeToolTip": "FinansableAPI.Infrastructure\\Persistence\\Repositories\\MensagemRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T17:32:59.439Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "MensagemService.cs",
+              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Application\\Services\\MensagemService.cs",
+              "RelativeDocumentMoniker": "FinansableAPI.Application\\Services\\MensagemService.cs",
+              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Application\\Services\\MensagemService.cs",
+              "RelativeToolTip": "FinansableAPI.Application\\Services\\MensagemService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T17:49:12.492Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "FinansableAPI.Application.csproj",
+              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Application\\FinansableAPI.Application.csproj",
+              "RelativeDocumentMoniker": "FinansableAPI.Application\\FinansableAPI.Application.csproj",
+              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Application\\FinansableAPI.Application.csproj",
+              "RelativeToolTip": "FinansableAPI.Application\\FinansableAPI.Application.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-11T18:50:09.161Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "FinansableAPI.Core.csproj",
+              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Core\\FinansableAPI.Core.csproj",
+              "RelativeDocumentMoniker": "FinansableAPI.Core\\FinansableAPI.Core.csproj",
+              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Core\\FinansableAPI.Core.csproj",
+              "RelativeToolTip": "FinansableAPI.Core\\FinansableAPI.Core.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-12T01:13:53.004Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "MensagemController.cs",
               "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI\\Controllers\\MensagemController.cs",
               "RelativeDocumentMoniker": "FinansableAPI\\Controllers\\MensagemController.cs",
@@ -72,38 +179,23 @@
               "RelativeToolTip": "FinansableAPI\\Controllers\\MensagemController.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAAewCEAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-11T18:05:07.687Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-11T18:05:07.687Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MensagemService.cs",
-              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Application\\Services\\MensagemService.cs",
-              "RelativeDocumentMoniker": "FinansableAPI.Application\\Services\\MensagemService.cs",
-              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Application\\Services\\MensagemService.cs",
-              "RelativeToolTip": "FinansableAPI.Application\\Services\\MensagemService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-11T17:49:12.492Z",
-              "EditorCaption": ""
+              "DocumentIndex": 9,
+              "Title": "FinansableAPI.Infrastructure.csproj",
+              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj",
+              "RelativeDocumentMoniker": "FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj",
+              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj",
+              "RelativeToolTip": "FinansableAPI.Infrastructure\\FinansableAPI.Infrastructure.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-11T18:54:27.053Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MensagemRepository.cs",
-              "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\Persistence\\Repositories\\MensagemRepository.cs",
-              "RelativeDocumentMoniker": "FinansableAPI.Infrastructure\\Persistence\\Repositories\\MensagemRepository.cs",
-              "ToolTip": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Infrastructure\\Persistence\\Repositories\\MensagemRepository.cs",
-              "RelativeToolTip": "FinansableAPI.Infrastructure\\Persistence\\Repositories\\MensagemRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-11T17:32:59.439Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "Mensagem.cs",
               "DocumentMoniker": "C:\\Downloads\\FrontFinansable\\FinansableAPI\\FinansableAPI.Core\\Entities\\Mensagem.cs",
               "RelativeDocumentMoniker": "FinansableAPI.Core\\Entities\\Mensagem.cs",
@@ -111,8 +203,7 @@
               "RelativeToolTip": "FinansableAPI.Core\\Entities\\Mensagem.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAAABYAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-11T17:16:45.908Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-11T17:16:45.908Z"
             }
           ]
         }

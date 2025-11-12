@@ -1,5 +1,37 @@
 [
   {
+    "ContainingType": "FinansableAPI.Controllers.MensagemController",
+    "Method": "CriarMensagem",
+    "RelativePath": "api/Mensagem",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "input",
+        "Type": "FinansableAPI.Controllers.MensagemInput",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FinansableAPI.Controllers.MensagemController",
+    "Method": "ListarMensagens",
+    "RelativePath": "api/Mensagem/{usuarioId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuarioId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FinansableAPI.Controllers.PoupancasController",
     "Method": "GetAll",
     "RelativePath": "api/Poupancas",

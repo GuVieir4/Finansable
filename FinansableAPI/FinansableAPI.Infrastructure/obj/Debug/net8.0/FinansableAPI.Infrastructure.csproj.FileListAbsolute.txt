@@ -70,10 +70,8 @@ C:\Users\guvie\Music\FrontFinansable\FinansableAPI\FinansableAPI.Infrastructure\
 C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Infrastructure\bin\Debug\net8.0\FinansableAPI.Infrastructure.deps.json
 C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Infrastructure\bin\Debug\net8.0\FinansableAPI.Infrastructure.dll
 C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Infrastructure\bin\Debug\net8.0\FinansableAPI.Infrastructure.pdb
-C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Infrastructure\bin\Debug\net8.0\FinansableAPI.Application.dll
 C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Infrastructure\bin\Debug\net8.0\FinansableAPI.Core.dll
 C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Infrastructure\bin\Debug\net8.0\FinansableAPI.Core.pdb
-C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Infrastructure\bin\Debug\net8.0\FinansableAPI.Application.pdb
 C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Infrastructure\obj\Debug\net8.0\FinansableAPI.Infrastructure.csproj.AssemblyReference.cache
 C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Infrastructure\obj\Debug\net8.0\FinansableAPI.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
 C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Infrastructure\obj\Debug\net8.0\FinansableAPI.Infrastructure.AssemblyInfoInputs.cache

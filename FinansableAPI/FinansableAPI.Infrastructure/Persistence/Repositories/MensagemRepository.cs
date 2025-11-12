@@ -1,5 +1,5 @@
 ﻿using FinansableAPI.Core.Entities;
-using FinansableAPI.Infrastructure.Persistence;
+using FinansableAPI.Core.Ports;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinansableAPI.Infrastructure.Persistence.Repositories

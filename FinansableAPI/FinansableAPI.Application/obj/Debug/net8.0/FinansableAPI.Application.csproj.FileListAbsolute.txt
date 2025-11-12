@@ -75,3 +75,5 @@ C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Application\obj\Debug\n
 C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Application\obj\Debug\net8.0\refint\FinansableAPI.Application.dll
 C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Application\obj\Debug\net8.0\FinansableAPI.Application.pdb
 C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Application\obj\Debug\net8.0\ref\FinansableAPI.Application.dll
+C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Application\bin\Debug\net8.0\FinansableAPI.Infrastructure.dll
+C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Application\bin\Debug\net8.0\FinansableAPI.Infrastructure.pdb
