@@ -14,6 +14,11 @@ function NewGoalButton({ onGoalCreated }) {
 
   const handleCreateGoal = async (e) => {
     e.preventDefault();
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      alert('Usuário não autenticado.');
+      return;
+    }
     try {
       const goalData = {
         nome: newGoal.nome,
@@ -21,7 +26,7 @@ function NewGoalButton({ onGoalCreated }) {
         valorAtual: parseFloat(newGoal.valorAtual) || 0,
         dataInicio: new Date().toISOString(),
         dataFim: newGoal.dataFim ? new Date(newGoal.dataFim).toISOString() : null,
-        usuarioId: 1
+        usuarioId: parseInt(userId)
       };
 
       const createdGoal = await createGoal(goalData);
