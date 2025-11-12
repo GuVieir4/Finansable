@@ -12,7 +12,7 @@ function TransactionsTable() {
       <div className="overflow-x-auto rounded-lg border border-[#265433] border-solid">
         <table className="min-w-[600px] w-full">
           <thead>
-            <tr className="bg-[#4CAF50]">
+            <tr className="bg-gradient-to-r from-green-400/30 to-green-600/30 backdrop-blur-md border-b border-green-400/50">
               <th className="px-4 py-3 text-left text-[#131711] text-sm font-medium leading-normal">Data</th>
               <th className="px-4 py-3 text-left text-[#131711] text-sm font-medium leading-normal">Descrição</th>
               <th className="px-4 py-3 text-left text-[#131711] text-sm font-medium leading-normal">Categoria</th>

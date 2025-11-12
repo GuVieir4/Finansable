@@ -48,6 +48,23 @@ function GoalsProgress() {
     };
 
     fetchGoals();
+
+    const handleGoalCreated = (event) => {
+      const createdGoal = event.detail;
+      const mappedGoal = {
+        id: createdGoal.id,
+        nome: createdGoal.nome,
+        valorAtual: createdGoal.valorAtual,
+        valorAlvo: createdGoal.valorAlvo,
+        dataAtual: new Date(),
+        dataFim: createdGoal.dataFim || "Indeterminado"
+      };
+      setGoals((prev) => [...prev, mappedGoal]);
+      window.dispatchEvent(new CustomEvent('goalsUpdated'));
+    };
+
+    window.addEventListener('goalCreated', handleGoalCreated);
+    return () => window.removeEventListener('goalCreated', handleGoalCreated);
   }, []);
 
   const handleDelete = async (id) => {
@@ -75,7 +92,6 @@ function GoalsProgress() {
     };
 
     setGoals((prev) => [...prev, mappedGoal]);
-    // Notify dashboard to recalculate happiness
     window.dispatchEvent(new CustomEvent('goalsUpdated'));
   };
 
@@ -93,17 +109,16 @@ function GoalsProgress() {
     try {
       const userId = localStorage.getItem('userId');
       const updateData = {
-        nome: editForm.nome,
-        valorAtual: parseFloat(editForm.valorAtual.replace(',', '.')),
-        valorAlvo: parseFloat(editForm.valorAlvo.replace(',', '.')),
-        dataInicio: new Date().toISOString(),
-        dataFim: editForm.dataFim ? new Date(editForm.dataFim).toISOString() : null,
-        usuarioId: parseInt(userId)
+        Nome: editForm.nome,
+        ValorAtual: parseFloat(editForm.valorAtual.replace(',', '.')),
+        ValorAlvo: parseFloat(editForm.valorAlvo.replace(',', '.')),
+        DataInicio: new Date().toISOString(),
+        DataFim: editForm.dataFim ? new Date(editForm.dataFim).toISOString() : null,
+        UsuarioId: parseInt(userId)
       };
 
       await updateGoal(editingGoalId, updateData);
 
-      // Update local state
       setGoals((prev) => prev.map(goal =>
         goal.id === editingGoalId
           ? {
@@ -118,7 +133,6 @@ function GoalsProgress() {
 
       setEditingGoalId(null);
       setEditForm({ nome: '', valorAtual: '', valorAlvo: '', dataFim: '' });
-      // Notify dashboard to recalculate happiness
       window.dispatchEvent(new CustomEvent('goalsUpdated'));
     } catch (error) {
       console.error("Erro ao editar meta:", error);
@@ -161,7 +175,6 @@ function GoalsProgress() {
             <div key={goal.id} className={`flex flex-col gap-3 rounded-xl border p-5 transition ${isDone ? "bg-[#D0EAD2] border-[#81C784] hover:shadow-md" : "bg-[#ffffff] border-[#dfe8df] hover:shadow-md"
               }`}>
               {editingGoalId === goal.id ? (
-                // Edit mode
                 <div className="flex flex-col gap-3">
                   <div>
                     <label className="text-sm font-medium text-[#264533]">Nome da Meta</label>
@@ -203,7 +216,6 @@ function GoalsProgress() {
                   </div>
                 </div>
               ) : (
-                // View mode
                 <div className="flex justify-between items-center">
                   <div>
                     <p className="text-[#264533] font-semibold text-lg">{goal.nome}</p>

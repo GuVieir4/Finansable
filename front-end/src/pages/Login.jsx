@@ -48,45 +48,44 @@ export default function Login() {
   };
 
   return (
-    <div className="bg-[#404240] font-display text-gray-100">
-      <div className="flex min-h-screen flex-col items-center justify-center p-4">
-        <div className="w-full max-w-md space-y-8">
-          <div className="text-center">
-            <h1 className="mt-6 text-3xl font-bold tracking-tight text-white">
-              Finansable
-            </h1>
-            <p className="mt-4 text-sm text-gray-400">
-              Bem-vindo de volta! Por favor, acesse sua conta.
-            </p>
-          </div>
+    <div className="bg-cover bg-center min-h-screen font-display text-gray-100 flex" style={{backgroundImage: 'url(/images/background.jpg)'}}>
+      <div className="flex-1"></div>
+      <div className="w-96 min-h-screen backdrop-blur-md bg-white/10 border-l border-gray-600 p-8 flex flex-col justify-center space-y-8">
+        <div className="text-center">
+          <h1 className="text-[2.53rem] font-bold tracking-tight font-zalando">
+            <span className="text-[#a2e8ae]">Finan</span><span className="text-[#2ba13f]">sable</span>
+          </h1>
+          <p className="mt-4 text-sm text-gray-300">
+            Bem-vindo de volta! Por favor, acesse sua conta.
+          </p>
+        </div>
 
-          <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-            <div className="space-y-4 rounded-md shadow-sm">
-              <div>
-                <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required
-                  className="relative block w-full appearance-none rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-white placeholder-gray-400 focus:z-10 focus:border-[#1dc92e] focus:outline-none focus:ring-[#1dc92e] sm:text-sm"/>
-              </div>
-
-              <div>
-                <input type="password" id="password" name="password" value={senha} onChange={(e) => setSenha(e.target.value)} placeholder="Senha" required
-                  className="relative block w-full appearance-none rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-white placeholder-gray-400 focus:z-10 focus:border-[#1dc92e] focus:outline-none focus:ring-[#1dc92e] sm:text-sm"/>
-              </div>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-4 rounded-md shadow-sm">
+            <div>
+              <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required
+                className="relative block w-full appearance-none rounded-md border border-gray-500 bg-white/20 px-3 py-2 text-white placeholder-gray-300 focus:z-10 focus:border-[#1dc92e] focus:outline-none focus:ring-[#1dc92e] sm:text-sm"/>
             </div>
 
             <div>
-              <button type="submit" className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#1dc92e] py-2 px-4 text-sm font-bold text-black hover:bg-[#1dc92e]/90 focus:outline-none focus:ring-2 focus:ring-[#1dc92e] focus:ring-offset-[#112113]">
-                Fazer Login
-              </button>
+              <input type="password" id="password" name="password" value={senha} onChange={(e) => setSenha(e.target.value)} placeholder="Senha" required
+                className="relative block w-full appearance-none rounded-md border border-gray-500 bg-white/20 px-3 py-2 text-white placeholder-gray-300 focus:z-10 focus:border-[#1dc92e] focus:outline-none focus:ring-[#1dc92e] sm:text-sm"/>
             </div>
-          </form>
+          </div>
 
-          <p className="mt-2 text-center text-sm text-gray-400">
-            Não tem uma conta?
-            <a className="font-medium text-[#1dc92e] hover:text-[#1dc92e]/80" href="#">
-              {" "} Criar conta
-            </a>
-          </p>
-        </div>
+          <div>
+            <button type="submit" className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#1dc92e] py-2 px-4 text-sm font-bold text-black hover:bg-[#1dc92e]/90 focus:outline-none focus:ring-2 focus:ring-[#1dc92e] focus:ring-offset-0">
+              Fazer Login
+            </button>
+          </div>
+        </form>
+
+        <p className="text-center text-sm text-gray-300">
+          Não tem uma conta?
+          <a className="font-medium text-[#1dc92e] hover:text-[#1dc92e]/80" href="#">
+            {" "} Criar conta
+          </a>
+        </p>
       </div>
     </div>
   );

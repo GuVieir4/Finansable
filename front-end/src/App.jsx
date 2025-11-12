@@ -12,7 +12,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Modal from "./components/Modal";
 import FormTransaction from "./components/FormTransaction"
 import Transactions from "./pages/Transactions";
-import Goals from "./pages/Goals";
+import GoalsPage from "./pages/GoalsPage";
 import { getGoals } from "./api";
 
 function ProtectedRoute({ children }) {
@@ -22,7 +22,7 @@ function ProtectedRoute({ children }) {
 
 function App() {
   const [openModal, setOpenModal] = useState(false);
-  const [happinessLevel, setHappinessLevel] = useState(3); // Default to neutral
+  const [happinessLevel, setHappinessLevel] = useState(3);
 
   const getHappinessInfo = (level) => {
     const messages = [
@@ -59,7 +59,7 @@ function App() {
     try {
       const goals = await getGoals(userId);
       if (goals.length === 0) {
-        setHappinessLevel(3); // Neutral if no goals
+        setHappinessLevel(3);
         return;
       }
 
@@ -67,9 +67,7 @@ function App() {
       const totalProgress = goals.reduce((sum, g) => sum + g.valorAtual, 0);
       const completionRate = totalTarget === 0 ? 0 : (totalProgress / totalTarget);
 
-      // Map completion rate to happiness level (0-6)
-      // 0-16%: 0 (very sad), 17-33%: 1, 34-50%: 2, 51-67%: 3 (neutral), 68-84%: 4, 85-100%: 5, 100%+: 6 (very happy)
-      let happiness = 3; // neutral default
+      let happiness = 3;
       if (completionRate <= 0.16) happiness = 0;
       else if (completionRate <= 0.33) happiness = 1;
       else if (completionRate <= 0.50) happiness = 2;
@@ -81,14 +79,13 @@ function App() {
       setHappinessLevel(happiness);
     } catch (error) {
       console.error("Erro ao calcular felicidade:", error);
-      setHappinessLevel(3); // Default to neutral on error
+      setHappinessLevel(3);
     }
   };
 
   useEffect(() => {
     calculateHappiness();
 
-    // Listen for goal updates to recalculate happiness
     const handleGoalsUpdated = () => {
       calculateHappiness();
     };
@@ -103,7 +100,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ProtectedRoute><div className="flex flex-col min-h-screen">
+        <Route path="/" element={<ProtectedRoute><div className="flex flex-col min-h-screen animate-fade-in">
           <Header />
           <main className="flex flex-1 justify-center px-4 sm:px-10 lg:px-40 py-5">
             <div className="layout-content-container flex flex-col w-full max-w-[960px]">
@@ -122,7 +119,7 @@ function App() {
                     alt={`Jarbas nível ${happinessLevel}`}
                     className="w-32 h-32 object-contain"
                     onError={(e) => {
-                      e.target.src = '/images/porco3.jpg'; // Fallback to neutral pig
+                      e.target.src = '/images/porco3.jpg';
                     }}
                   />
                 </div>
@@ -178,7 +175,7 @@ function App() {
 
           <Route path="goals" element={<div>
             <Header/>
-            <Goals/>
+            <GoalsPage/>
             <Footer/>
           </div>} />
 
