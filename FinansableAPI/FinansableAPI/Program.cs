@@ -48,6 +48,8 @@ builder.Services.AddScoped<FinansableAPI.Application.Interfaces.IPoupancaService
 builder.Services.AddScoped<FinansableAPI.Core.Ports.IPoupancaRepository, FinansableAPI.Infrastructure.Persistence.Repositories.PoupancaRepository>();
 builder.Services.AddScoped<FinansableAPI.Application.Interfaces.ITransacaoService, FinansableAPI.Application.Services.TransacaoService>();
 builder.Services.AddScoped<FinansableAPI.Core.Ports.ITransacaoRepository, FinansableAPI.Infrastructure.Persistence.Repositories.TransacaoRepository>();
+builder.Services.AddScoped<FinansableAPI.Application.Interfaces.IMensagemService, FinansableAPI.Application.Services.MensagemService>();
+builder.Services.AddScoped<FinansableAPI.Core.Ports.IMensagemRepository, FinansableAPI.Infrastructure.Persistence.Repositories.MensagemRepository>();
 
 builder.Services.AddControllers();
 

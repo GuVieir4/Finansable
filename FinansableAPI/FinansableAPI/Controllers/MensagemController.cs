@@ -1,6 +1,7 @@
 ﻿using FinansableAPI.Application.DTOs;
 using FinansableAPI.Application.Interfaces;
 using FinansableAPI.Application.Services;
+using FinansableAPI.Core.Entities;
 using FinansableAPI.Core.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,9 @@ namespace FinansableAPI.Controllers
     [Route("api/[controller]")]
     public class MensagemController : ControllerBase
     {
-        private readonly MensagemService _service;
+        private readonly IMensagemService _service;
 
-        public MensagemController(MensagemService service)
+        public MensagemController(IMensagemService service)
         {
             _service = service;
         }
@@ -24,7 +25,7 @@ namespace FinansableAPI.Controllers
             if (string.IsNullOrWhiteSpace(input.Texto))
                 return BadRequest("O texto da mensagem não pode ser vazio.");
 
-            var mensagem = await _service.CriarMensagemAsync(input.Texto, input.Direcao, input.UsuarioId);
+            var mensagem = await _service.CriarMensagemAsync(input.Texto, (DirecaoMensagem)input.Direcao, input.UsuarioId);
             return Ok(mensagem);
         }
 
