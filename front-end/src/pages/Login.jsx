@@ -82,7 +82,7 @@ export default function Login() {
 
         <p className="text-center text-sm text-gray-300">
           Não tem uma conta?
-          <a className="font-medium text-[#1dc92e] hover:text-[#1dc92e]/80" href="#">
+          <a className="font-medium text-[#1dc92e] hover:text-[#1dc92e]/80 cursor-pointer" onClick={() => navigate("/register")}>
             {" "} Criar conta
           </a>
         </p>

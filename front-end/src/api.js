@@ -58,3 +58,15 @@ export const updateGoal = async (id, goalData) => {
   const { data } = await api.put(`/Poupancas/${id}`, goalData);
   return data;
 };
+
+export const createUser = async (userData) => {
+  console.log("🔍 Creating user:", userData);
+  try {
+    const { data } = await api.post("/Usuarios/create", userData);
+    console.log("✅ User created:", data);
+    return data;
+  } catch (error) {
+    console.error("❌ Create user error:", error.response?.data || error.message);
+    throw error;
+  }
+};
