@@ -32,6 +32,11 @@ export const login = async (email, senha) => {
   }
 };
 
+export const createUser = async (userData) => {
+  const { data } = await api.post("/api/Usuarios/create", userData);
+  return data;
+};
+
 export const getTransactions = async (userId) => {
   const { data } = await api.get(`/api/Transacoes/usuario/${userId}`);
   return data;
@@ -69,4 +74,8 @@ export const createTransaction = async (transactionData) => {
 export const updateTransaction = async (id, transactionData) => {
   const { data } = await api.put(`/api/Transacoes/${id}`, transactionData);
   return data;
+};
+
+export const deleteTransaction = async (id) => {
+  await api.delete(`/api/Transacoes/${id}`);
 };
