@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { getGoals, deleteGoal, updateGoal } from '../api';
 import { CalendarDays, Pencil, Trash2, Check, X } from "lucide-react";
 import NewGoalButton from './NewGoalButton';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function GoalsProgress() {
   const [goals, setGoals] = useState([]);
@@ -11,6 +11,7 @@ function GoalsProgress() {
   const [editingGoalId, setEditingGoalId] = useState(null);
   const [editForm, setEditForm] = useState({ nome: '', valorAtual: '', valorAlvo: '', dataFim: '' });
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchGoals = async () => {
@@ -155,7 +156,12 @@ function GoalsProgress() {
         <h2 className="text-[#131711] text-[20px] sm:text-[22px] font-bold leading-tight tracking-[-0.015em]">
           Progresso nas Metas <i className="fa-solid fa-bullseye"></i>
         </h2>
-        <NewGoalButton onGoalCreated={handleGoalCreated} />
+        <button
+          onClick={() => navigate('/goals')}
+          className="bg-[#4CAF50] text-white px-4 py-2 rounded-lg hover:bg-[#45a049] transition"
+        >
+          Ver Todas as Metas
+        </button>
         </div>
       )}
 

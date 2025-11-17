@@ -84,7 +84,7 @@ function TransactionsTable() {
 
   return (
     <section className="px-4 py-3">
-      <div className="overflow-x-auto rounded-lg border border-[#265433] border-solid">
+      <div className="overflow-x-auto rounded-lg border border-[#265433] border-solid bg-white">
         <table className="min-w-[600px] w-full">
           <thead>
             <tr className="bg-gradient-to-r from-green-400/30 to-green-600/30 backdrop-blur-md border-b border-green-400/50">
