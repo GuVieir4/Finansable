@@ -50,7 +50,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="relative flex items-center justify-between border-b border-[#000000]/20 px-6 py-3 md:px-10 bg-white shadow-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between border-b border-[#000000]/20 px-6 py-3 md:px-10 bg-white shadow-sm">
       <Link to="/" className="flex items-center gap-3 text-[#131711] group">
         <motion.img
           src="porquinho.png"

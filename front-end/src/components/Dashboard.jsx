@@ -29,9 +29,9 @@ function Dashboard() {
     // Map happiness levels to available images
     const imageNames = [
       "porco0.png",   // 0: Very sad
-      "porco1].png",  // 1: Sad (note: filename has bracket)
+      "porco1.png",   // 1: Sad
       "porco2.png",   // 2: Unhappy
-      "porco3.jpg",   // 3: Neutral
+      "porco3.png",   // 3: Neutral
       "porco4.png",   // 4: Happy
       "porco5.png",   // 5: Very happy
       "porco5.png"    // 6: Super happy (reuse level 5)
@@ -48,23 +48,48 @@ function Dashboard() {
     if (!userId) return;
 
     try {
-      const goals = await getGoals(userId);
-      if (goals.length === 0) {
-        setHappinessLevel(3);
-        return;
+      const [goals, transactions] = await Promise.all([
+        getGoals(userId),
+        getTransactions(userId)
+      ]);
+
+      // Calculate goals completion
+      let goalsScore = 0;
+      if (goals.length > 0) {
+        const totalTarget = goals.reduce((sum, g) => sum + g.valorAlvo, 0);
+        const totalProgress = goals.reduce((sum, g) => sum + g.valorAtual, 0);
+        const completionRate = totalTarget === 0 ? 0 : (totalProgress / totalTarget);
+        goalsScore = completionRate;
       }
 
-      const totalTarget = goals.reduce((sum, g) => sum + g.valorAlvo, 0);
-      const totalProgress = goals.reduce((sum, g) => sum + g.valorAtual, 0);
-      const completionRate = totalTarget === 0 ? 0 : (totalProgress / totalTarget);
+      // Calculate financial health
+      const totalIncome = transactions
+        .filter(t => t.tipoMovimentacao === 1)
+        .reduce((sum, t) => sum + (t.valor || 0), 0);
+      const totalExpenses = transactions
+        .filter(t => t.tipoMovimentacao === 0)
+        .reduce((sum, t) => sum + (t.valor || 0), 0);
+      const balance = totalIncome - totalExpenses;
+      const savingsRate = totalIncome > 0 ? (balance / totalIncome) : 0;
+
+      // Activity score based on number of transactions
+      const activityScore = Math.min(transactions.length / 50, 1); // Max at 50 transactions
+
+      // Overall score (weighted)
+      const overallScore = (
+        goalsScore * 0.4 +      // 40% goals
+        savingsRate * 0.3 +     // 30% savings rate
+        activityScore * 0.2 +   // 20% activity
+        (balance > 0 ? 0.1 : 0) // 10% positive balance
+      );
 
       let happiness = 3;
-      if (completionRate <= 0.16) happiness = 0;
-      else if (completionRate <= 0.33) happiness = 1;
-      else if (completionRate <= 0.50) happiness = 2;
-      else if (completionRate <= 0.67) happiness = 3;
-      else if (completionRate <= 0.84) happiness = 4;
-      else if (completionRate < 1.0) happiness = 5;
+      if (overallScore <= 0.15) happiness = 0;
+      else if (overallScore <= 0.30) happiness = 1;
+      else if (overallScore <= 0.45) happiness = 2;
+      else if (overallScore <= 0.60) happiness = 3;
+      else if (overallScore <= 0.75) happiness = 4;
+      else if (overallScore < 0.9) happiness = 5;
       else happiness = 6;
 
       setHappinessLevel(happiness);
@@ -95,7 +120,7 @@ function Dashboard() {
   return (
     <div className="flex flex-col min-h-screen animate-fade-in">
       <Header />
-      <main className="flex flex-1 justify-center px-4 sm:px-10 lg:px-40 py-5">
+      <main className="flex flex-1 justify-center px-4 sm:px-10 lg:px-40 py-5 pt-20">
         <div className="layout-content-container flex flex-col w-full max-w-[960px]">
           <section className="flex flex-wrap justify-between gap-3 p-4">
             <div className="flex min-w-full sm:min-w-72 flex-col gap-3">
@@ -112,7 +137,7 @@ function Dashboard() {
                 alt={`Jarbas nível ${happinessLevel}`}
                 className="w-32 h-32 object-contain"
                 onError={(e) => {
-                  e.target.src = '/images/porco3.jpg';
+                  e.target.src = '/images/porco3.png';
                 }}
               />
             </div>

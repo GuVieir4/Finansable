@@ -28,14 +28,18 @@ function App() {
 
         <Route path="/plans" element={<div className="flex flex-col min-h-screen">
           <Header/>
-          <Plans/>
+          <div className="pt-20">
+            <Plans/>
+          </div>
           <Footer/>
         </div>} />
 
         <Route path="/chatbot" element={
           <div>
             <Header/>
-            <Chatbot/>
+            <div className="pt-20">
+              <Chatbot/>
+            </div>
           </div>
         } />
 
@@ -43,13 +47,17 @@ function App() {
 
         <Route path="/transactions" element={<div>
           <Header/>
-          <Transactions/>
+          <div className="pt-20">
+            <Transactions/>
+          </div>
           <Footer/>
         </div>} />
 
           <Route path="goals" element={<div>
             <Header/>
-            <GoalsPage/>
+            <div className="pt-20">
+              <GoalsPage/>
+            </div>
             <Footer/>
           </div>} />
 
