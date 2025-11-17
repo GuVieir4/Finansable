@@ -1,11 +1,86 @@
+import React, { useState, useEffect } from "react";
+import { getTransactions, createTransaction } from "../api";
+
 function TransactionsTable() {
-  const transactions = [
-    { date: "06/10/2025", description: "Salário", category: "Renda", value: "+R$ 1.512,00" },
-    { date: "06/10/2025", description: "Mercado", category: "Alimentação", value: "-R$ 200,00" },
-    { date: "08/06/2025", description: "Agiota", category: "Despesa", value: "-R$ 700,00" },
-    { date: "08/06/2025", description: "Conta de Luz", category: "Contas", value: "-R$ 180,00" },
-    { date: "09/10/2025", description: "Entrega iFood", category: "Renda", value: "+R$ 150,00" },
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const mockTransactions = [
+    { nome: "Salário", valor: 1512.00, tipoCategoria: 3, tipoMeioPagamento: 0, tipoMovimentacao: 1, data: "2025-10-06T00:00:00Z" },
+    { nome: "Mercado", valor: 200.00, tipoCategoria: 0, tipoMeioPagamento: 1, tipoMovimentacao: 0, data: "2025-10-06T00:00:00Z" },
+    { nome: "Agiota", valor: 700.00, tipoCategoria: 4, tipoMeioPagamento: 2, tipoMovimentacao: 0, data: "2025-06-08T00:00:00Z" },
+    { nome: "Conta de Luz", valor: 180.00, tipoCategoria: 2, tipoMeioPagamento: 0, tipoMovimentacao: 0, data: "2025-06-08T00:00:00Z" },
+    { nome: "Entrega iFood", valor: 150.00, tipoCategoria: 3, tipoMeioPagamento: 1, tipoMovimentacao: 1, data: "2025-10-09T00:00:00Z" },
   ];
+
+  const fetchTransactions = async () => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+
+    try {
+      console.log('Fetching transactions for userId:', userId);
+      let data = await getTransactions(userId);
+      console.log('Fetched data:', data);
+
+      // If no transactions, import mock data
+      if (data.length === 0) {
+        for (const mock of mockTransactions) {
+          await createTransaction({
+            ...mock,
+            usuarioId: parseInt(userId)
+          });
+        }
+        // Fetch again after importing
+        data = await getTransactions(userId);
+      }
+
+      // Sort by date descending (most recent first)
+      data.sort((a, b) => new Date(b.data) - new Date(a.data));
+
+      // Transform data to match the expected format
+      const formattedTransactions = data.map(t => ({
+        date: t.data ? new Date(t.data).toLocaleDateString('pt-BR') : 'Data inválida',
+        description: t.nome || 'Sem descrição',
+        category: getCategoryName(t.tipoCategoria ?? 0),
+        value: (t.tipoMovimentacao === 1 ? '+' : '-') + 'R$ ' + (t.valor != null ? Math.abs(t.valor).toFixed(2).replace('.', ',') : '0,00')
+      }));
+      setTransactions(formattedTransactions);
+    } catch (error) {
+      console.error("Erro ao buscar transações:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
+
+  useEffect(() => {
+    const handleTransactionAdded = () => {
+      fetchTransactions();
+    };
+
+    window.addEventListener('transactionAdded', handleTransactionAdded);
+
+    return () => {
+      window.removeEventListener('transactionAdded', handleTransactionAdded);
+    };
+  }, []);
+
+  const getCategoryName = (tipoCategoria) => {
+    // Map TipoCategoria to category names
+    const categories = {
+      0: "Alimentação",
+      1: "Transporte",
+      2: "Contas",
+      3: "Renda",
+      4: "Despesa"
+    };
+    return categories[tipoCategoria] || "Outros";
+  };
+
+  const displayedTransactions = transactions.slice(0, 5);
 
   return (
     <section className="px-4 py-3">
@@ -20,7 +95,7 @@ function TransactionsTable() {
             </tr>
           </thead>
           <tbody>
-            {transactions.map((transaction, index) => {
+            {displayedTransactions.map((transaction, index) => {
               const isEntrada = transaction.value.startsWith("+");
               return (
                 <tr

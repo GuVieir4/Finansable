@@ -90,8 +90,15 @@ namespace FinansableAPI.Application.Services
                     throw new InvalidOperationException("Não é possível adicionar valores a uma poupança já concluída.");
                 }
 
-                // Update poupanca value
-                poupanca.ValorAtual += transacaoDto.Valor;
+                // Update poupanca value: add for entrada, subtract for saida
+                if (transacaoDto.TipoMovimentacao == 1) // Entrada
+                {
+                    poupanca.ValorAtual += transacaoDto.Valor;
+                }
+                else // Saída
+                {
+                    poupanca.ValorAtual -= transacaoDto.Valor;
+                }
                 await _poupancaRepository.UpdateAsync(poupanca);
             }
 
