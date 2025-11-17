@@ -6,9 +6,6 @@ const api = axios.create({
   baseURL: API_BASE_URL,
 });
 
-console.log("🔧 Axios baseURL set to:", API_BASE_URL);
-
-// Add request interceptor to include auth token
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('authToken');
@@ -26,7 +23,7 @@ export const login = async (email, senha) => {
   console.log("🔍 API_BASE_URL:", import.meta.env.VITE_API_BASE_URL);
   console.log("🔍 Login attempt:", { email, senha });
   try {
-    const { data } = await api.post("/Usuarios/login", { email, senha });
+    const { data } = await api.post("/api/Usuarios/login", { email, senha });
     console.log("✅ Login success:", data);
     return data;
   } catch (error) {
@@ -36,25 +33,44 @@ export const login = async (email, senha) => {
 };
 
 export const getTransactions = async (userId) => {
-  const { data } = await api.get(`/Transacoes/usuario/${userId}`);
+  const { data } = await api.get(`/api/Transacoes/usuario/${userId}`);
+  return data;
+};
+
+export const getDashboardData = async (userId) => {
+  const { data } = await api.get(`/api/Transacoes/dashboard/${userId}`);
   return data;
 };
 
 export const getGoals = async (userId) => {
-  const { data } = await api.get(`/Poupancas/usuario/${userId}`);
+  const { data } = await api.get(`/api/Poupancas/usuario/${userId}`);
   return data;
 };
 
 export const createGoal = async (goalData) => {
-  const { data } = await api.post("/Poupancas", goalData);
+  const { data } = await api.post("/api/Poupancas", goalData);
   return data;
 };
 
 export const deleteGoal = async (id) => {
-  await api.delete(`/Poupancas/${id}`);
+  await api.delete(`/api/Poupancas/${id}`);
 };
 
 export const updateGoal = async (id, goalData) => {
-  const { data } = await api.put(`/Poupancas/${id}`, goalData);
+  const { data } = await api.put(`/api/Poupancas/${id}`, goalData);
   return data;
+};
+
+export const createTransaction = async (transactionData) => {
+  const { data } = await api.post("/api/Transacoes", transactionData);
+  return data;
+};
+
+export const updateTransaction = async (id, transactionData) => {
+  const { data } = await api.put(`/api/Transacoes/${id}`, transactionData);
+  return data;
+};
+
+export const deleteTransaction = async (id) => {
+  await api.delete(`/api/Transacoes/${id}`);
 };

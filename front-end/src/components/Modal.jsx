@@ -37,7 +37,7 @@ export default function Modal({ isOpen, onClose, children, title }) {
               transition={{ delay: 0.08, duration: 0.3 }}
             >
               <h2 className="text-[#264533] text-xl font-bold tracking-tight">
-                {title || "Nova Meta"}
+                {title}
               </h2>
               <motion.button
                 onClick={onClose}

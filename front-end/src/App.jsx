@@ -141,9 +141,25 @@ function App() {
 
               <GoalsProgress />
 
-              <Modal isOpen={openModal} onClose={() =>setOpenModal(false)}>
-                <FormTransaction onClose={() =>setOpenModal(false)} />
-              </Modal>
+              {openModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+                  <div className="bg-white p-6 rounded-2xl shadow-xl w-full max-w-md mx-4">
+                    <div className="flex justify-between items-center border-b pb-3 mb-4">
+                      <h2 className="text-[#264533] text-xl font-bold">Nova Transação</h2>
+                      <button
+                        onClick={() => setOpenModal(false)}
+                        className="text-[#366348] hover:text-[#264533]"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    <FormTransaction
+                      onClose={() => setOpenModal(false)}
+                      onSuccess={() => window.dispatchEvent(new Event('transactionAdded'))}
+                    />
+                  </div>
+                </div>
+              )}
 
             </div>
           </main>

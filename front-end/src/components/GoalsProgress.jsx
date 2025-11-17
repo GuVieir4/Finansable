@@ -166,7 +166,12 @@ function GoalsProgress() {
       )}
 
       <div className="flex flex-col gap-5 mt-9">
-        {goals.map((goal) => {
+        {(() => {
+          const displayedGoals = location.pathname === "/" ? goals
+            .map(goal => ({ ...goal, percent: goal.valorAlvo > 0 ? Math.min((goal.valorAtual / goal.valorAlvo) * 100, 100) : 0 }))
+            .sort((a, b) => b.percent - a.percent)
+            .slice(0, 3) : goals;
+          return displayedGoals.map((goal) => {
           const percent = goal.valorAlvo > 0 ? Math.min((goal.valorAtual / goal.valorAlvo) * 100, 100) : 0;
           const isDone = percent >= 100;
           const isValidDate = goal.dataFim && !isNaN(new Date(goal.dataFim));
@@ -277,7 +282,8 @@ function GoalsProgress() {
               </div>
             </div>
           );
-        })}
+        });
+        })()}
       </div>
     </section>
   );

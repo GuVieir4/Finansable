@@ -1,51 +1,91 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createTransaction, updateTransaction, getGoals } from "../api";
 
-export default function FormTransaction({ onClose }) {
+export default function FormTransaction({ onClose, onSuccess, transactionToEdit }) {
   const [categoria, setCategoria] = useState("");
-  const [descricao, setDescricao] = useState("");
+  const [nome, setNome] = useState("");
   const [valor, setValor] = useState("");
-  const [tipo, setTipo] = useState("entrada");
+  const [tipoMovimentacao, setTipoMovimentacao] = useState(1);
   const [data, setData] = useState("");
+  const [poupancaId, setPoupancaId] = useState("");
+  const [goals, setGoals] = useState([]);
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+    const fetchGoals = async () => {
+      const userId = localStorage.getItem('userId');
+      if (userId) {
+        try {
+          const goalsData = await getGoals(userId);
+          setGoals(goalsData);
+        } catch (error) {
+          console.error("Erro ao buscar metas:", error);
+        }
+      }
+    };
+    fetchGoals();
+  }, []);
+
+  useEffect(() => {
+    if (transactionToEdit) {
+      setCategoria(transactionToEdit.tipoCategoria?.toString() || "");
+      setNome(transactionToEdit.nome || "");
+      setValor(Math.abs(transactionToEdit.valor)?.toString() || "");
+      setTipoMovimentacao(transactionToEdit.tipoMovimentacao?.toString() || "1");
+      setData(transactionToEdit.data ? new Date(transactionToEdit.data).toISOString().split('T')[0] : "");
+      setPoupancaId(transactionToEdit.poupancaId?.toString() || "");
+    }
+  }, [transactionToEdit]);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const userId = localStorage.getItem('userId');
+
     const dataToSend = {
-      categoria,
-      descricao,
+      usuarioId: parseInt(userId),
+      nome,
       valor: parseFloat(valor),
-      tipo,
-      data,
+      tipoCategoria: parseInt(categoria),
+      tipoMeioPagamento: 0, // Default
+      tipoMovimentacao: parseInt(tipoMovimentacao),
+      data: new Date(data).toISOString(),
+      poupancaId: poupancaId ? parseInt(poupancaId) : null,
     };
 
-    console.log("Nova Movimentação", dataToSend);
-
-    onClose();
+    try {
+      if (transactionToEdit) {
+        await updateTransaction(transactionToEdit.id, dataToSend);
+      } else {
+        await createTransaction(dataToSend);
+      }
+      if (onSuccess) onSuccess();
+      onClose();
+    } catch (error) {
+      console.error("Erro ao salvar transação:", error);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <h2 className="text-xl font-semibold mb-2 text-gray-700 text-center">
-        Nova Movimentação
-      </h2>
-
       <select
         value={categoria}
         onChange={(event) => setCategoria(event.target.value)}
         className="w-full border rounded-lg p-2"
+        required
       >
         <option value="">Selecione a categoria</option>
-        <option value="salario">Salário</option>
-        <option value="alimentacao">Alimentação</option>
-        <option value="lazer">Lazer</option>
-        <option value="outros">Outros</option>
+        <option value="0">Alimentação</option>
+        <option value="1">Transporte</option>
+        <option value="2">Contas</option>
+        <option value="3">Renda</option>
+        <option value="4">Despesa</option>
       </select>
 
       <input
         type="text"
-        placeholder="Descrição"
-        value={descricao}
-        onChange={(event) => setDescricao(event.target.value)}
+        placeholder="Nome"
+        value={nome}
+        onChange={(event) => setNome(event.target.value)}
         className="w-full border rounded-lg p-2"
         required
       />
@@ -60,12 +100,13 @@ export default function FormTransaction({ onClose }) {
       />
 
       <select
-        value={tipo}
-        onChange={(event) => setTipo(event.target.value)}
+        value={tipoMovimentacao}
+        onChange={(event) => setTipoMovimentacao(event.target.value)}
         className="w-full border rounded-lg p-2"
+        required
       >
-        <option value="entrada">Entrada</option>
-        <option value="saida">Saída</option>
+        <option value="1">Entrada</option>
+        <option value="0">Saída</option>
       </select>
 
       <input
@@ -75,6 +116,19 @@ export default function FormTransaction({ onClose }) {
         className="w-full border rounded-lg p-2"
         required
       />
+
+      <select
+        value={poupancaId}
+        onChange={(event) => setPoupancaId(event.target.value)}
+        className="w-full border rounded-lg p-2"
+      >
+        <option value="">Selecione uma meta (opcional)</option>
+        {goals.map((goal) => (
+          <option key={goal.id} value={goal.id}>
+            {goal.nome} - R$ {goal.valorAtual} / R$ {goal.valorAlvo}
+          </option>
+        ))}
+      </select>
 
       <div className="flex gap-3 mt-6">
         <button
