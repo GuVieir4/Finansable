@@ -6,6 +6,8 @@ namespace FinansableAPI.Core.Ports
     {
         Task<Usuario> GetByIdAsync(int id);
         Task<IEnumerable<Usuario>> GetAllAsync();
+        Task<Usuario?> GetByEmailAsync(string email);
+        Task<Usuario?> GetByCpfAsync(string cpf);
         Task AddAsync(Usuario usuario);
         Task UpdateAsync(Usuario usuario);
         Task DeleteAsync(int id);

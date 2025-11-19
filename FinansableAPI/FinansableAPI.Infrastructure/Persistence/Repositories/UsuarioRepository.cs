@@ -23,6 +23,16 @@ namespace FinansableAPI.Infrastructure.Persistence.Repositories
             return await _context.Usuarios.ToListAsync();
         }
 
+        public async Task<Usuario?> GetByEmailAsync(string email)
+        {
+            return await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task<Usuario?> GetByCpfAsync(string cpf)
+        {
+            return await _context.Usuarios.FirstOrDefaultAsync(u => u.CPF == cpf);
+        }
+
         public async Task AddAsync(Usuario usuario)
         {
             await _context.Usuarios.AddAsync(usuario);

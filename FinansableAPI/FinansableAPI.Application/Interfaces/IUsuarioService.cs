@@ -6,6 +6,8 @@ namespace FinansableAPI.Application.Interfaces
     {
         Task<UsuarioDTO> GetByIdAsync(int id);
         Task<IEnumerable<UsuarioDTO>> GetAllAsync();
+        Task<UsuarioDTO?> GetByEmailAsync(string email);
+        Task<UsuarioDTO?> GetByCpfAsync(string cpf);
         Task AddAsync(CreateUsuarioDTO usuarioDto);
         Task UpdateAsync(UpdateUsuarioDTO usuarioDto);
         Task DeleteAsync(int id);

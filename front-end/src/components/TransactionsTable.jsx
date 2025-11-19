@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getTransactions, createTransaction } from "../api";
+import { getTransactions } from "../api";
 
 function TransactionsTable() {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const mockTransactions = [
-    { nome: "Salário", valor: 1512.00, tipoCategoria: 3, tipoMeioPagamento: 0, tipoMovimentacao: 1, data: "2025-10-06T00:00:00Z" },
-    { nome: "Mercado", valor: 200.00, tipoCategoria: 0, tipoMeioPagamento: 1, tipoMovimentacao: 0, data: "2025-10-06T00:00:00Z" },
-    { nome: "Agiota", valor: 700.00, tipoCategoria: 4, tipoMeioPagamento: 2, tipoMovimentacao: 0, data: "2025-06-08T00:00:00Z" },
-    { nome: "Conta de Luz", valor: 180.00, tipoCategoria: 2, tipoMeioPagamento: 0, tipoMovimentacao: 0, data: "2025-06-08T00:00:00Z" },
-    { nome: "Entrega iFood", valor: 150.00, tipoCategoria: 3, tipoMeioPagamento: 1, tipoMovimentacao: 1, data: "2025-10-09T00:00:00Z" },
-  ];
 
   const fetchTransactions = async () => {
     const userId = localStorage.getItem('userId');
@@ -19,20 +11,8 @@ function TransactionsTable() {
 
     try {
       console.log('Fetching transactions for userId:', userId);
-      let data = await getTransactions(userId);
+      const data = await getTransactions(userId);
       console.log('Fetched data:', data);
-
-      // If no transactions, import mock data
-      if (data.length === 0) {
-        for (const mock of mockTransactions) {
-          await createTransaction({
-            ...mock,
-            usuarioId: parseInt(userId)
-          });
-        }
-        // Fetch again after importing
-        data = await getTransactions(userId);
-      }
 
       // Sort by date descending (most recent first)
       data.sort((a, b) => new Date(b.data) - new Date(a.data));
@@ -75,48 +55,69 @@ function TransactionsTable() {
       1: "Transporte",
       2: "Contas",
       3: "Renda",
-      4: "Despesa"
+      4: "Despesa",
+      5: "Meta"
     };
     return categories[tipoCategoria] || "Outros";
   };
 
   const displayedTransactions = transactions.slice(0, 5);
 
+  if (loading) {
+    return (
+      <section className="px-4 py-3">
+        <div className="overflow-x-auto rounded-lg border border-[#265433] border-solid bg-white">
+          <div className="flex justify-center items-center h-32">
+            <div className="text-gray-500">Carregando...</div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="px-4 py-3">
       <div className="overflow-x-auto rounded-lg border border-[#265433] border-solid bg-white">
-        <table className="min-w-[600px] w-full">
-          <thead>
-            <tr className="bg-gradient-to-r from-green-400/30 to-green-600/30 backdrop-blur-md border-b border-green-400/50">
-              <th className="px-4 py-3 text-left text-[#131711] text-sm font-medium leading-normal">Data</th>
-              <th className="px-4 py-3 text-left text-[#131711] text-sm font-medium leading-normal">Descrição</th>
-              <th className="px-4 py-3 text-left text-[#131711] text-sm font-medium leading-normal">Categoria</th>
-              <th className="px-4 py-3 text-left text-[#131711] text-sm font-medium leading-normal">Valor</th>
-            </tr>
-          </thead>
-          <tbody>
-            {displayedTransactions.map((transaction, index) => {
-              const isEntrada = transaction.value.startsWith("+");
-              return (
-                <tr
-                  key={index} className={`border-t border-t-[#dee5dc] ${isEntrada ? "hover:bg-green-300" : "hover:bg-red-300"} transition duration-700`}>
-                  <td className="h-[72px] px-4 py-2 text-[#000000] text-sm font-normal leading-normal">
-                    {transaction.date}
-                  </td>
-                  <td className="h-[72px] px-4 py-2 text-[#000000] text-sm font-normal leading-normal">
-                    {transaction.description}
-                  </td>
-                  <td className="h-[72px] px-4 py-2 text-[#000000] text-sm font-normal leading-normal">
-                    {transaction.category}
-                  </td>
-                  <td className="h-[72px] px-4 py-2 text-[#000000] text-sm font-normal leading-normal">
-                    {transaction.value}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        {displayedTransactions.length === 0 ? (
+          <div className="p-6 text-center text-[#366348]">
+            <img src="/images/emoji.png" alt="Ops!" className="w-16 h-16 mb-4 mx-auto opacity-70" />
+            <p className="text-[#366348] text-lg font-medium">Ops! Nada aqui ainda.</p>
+            <p className="text-gray-400 text-sm text-center mt-2">Adicione suas transações para ver os dados aqui.</p>
+          </div>
+        ) : (
+          <table className="min-w-[600px] w-full">
+            <thead>
+              <tr className="bg-gradient-to-r from-green-400/30 to-green-600/30 backdrop-blur-md border-b border-green-400/50">
+                <th className="px-4 py-3 text-left text-[#131711] text-sm font-medium leading-normal">Data</th>
+                <th className="px-4 py-3 text-left text-[#131711] text-sm font-medium leading-normal">Descrição</th>
+                <th className="px-4 py-3 text-left text-[#131711] text-sm font-medium leading-normal">Categoria</th>
+                <th className="px-4 py-3 text-left text-[#131711] text-sm font-medium leading-normal">Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              {displayedTransactions.map((transaction, index) => {
+                const isEntrada = transaction.value.startsWith("+");
+                return (
+                  <tr
+                    key={index} className={`border-t border-t-[#dee5dc] ${isEntrada ? "hover:bg-green-300" : "hover:bg-red-300"} transition duration-700`}>
+                    <td className="h-[72px] px-4 py-2 text-[#000000] text-sm font-normal leading-normal">
+                      {transaction.date}
+                    </td>
+                    <td className="h-[72px] px-4 py-2 text-[#000000] text-sm font-normal leading-normal">
+                      {transaction.description}
+                    </td>
+                    <td className="h-[72px] px-4 py-2 text-[#000000] text-sm font-normal leading-normal">
+                      {transaction.category}
+                    </td>
+                    <td className="h-[72px] px-4 py-2 text-[#000000] text-sm font-normal leading-normal">
+                      {transaction.value}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
       </div>
     </section>
   );

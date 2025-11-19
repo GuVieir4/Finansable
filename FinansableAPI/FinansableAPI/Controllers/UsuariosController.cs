@@ -81,8 +81,66 @@ namespace FinansableAPI.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateUsuarioDTO usuarioDto)
         {
-            await _usuarioService.AddAsync(usuarioDto);
-            return CreatedAtAction(nameof(GetById), new { id = 0 }, usuarioDto);
+            try
+            {
+                // Validação manual dos dados
+                if (string.IsNullOrWhiteSpace(usuarioDto.Nome))
+                {
+                    return BadRequest(new { message = "Nome é obrigatório" });
+                }
+
+                if (string.IsNullOrWhiteSpace(usuarioDto.CPF))
+                {
+                    return BadRequest(new { message = "CPF é obrigatório" });
+                }
+
+                if (string.IsNullOrWhiteSpace(usuarioDto.Email))
+                {
+                    return BadRequest(new { message = "Email é obrigatório" });
+                }
+
+                if (string.IsNullOrWhiteSpace(usuarioDto.Senha))
+                {
+                    return BadRequest(new { message = "Senha é obrigatória" });
+                }
+
+                // Verifica se a senha tem pelo menos 8 caracteres
+                if (usuarioDto.Senha.Length < 8)
+                {
+                    return BadRequest(new { message = "Senha deve ter pelo menos 8 caracteres" });
+                }
+
+                // Verifica se a senha tem pelo menos um caractere especial
+                var caracteresEspeciais = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+                if (!usuarioDto.Senha.Any(c => caracteresEspeciais.Contains(c)))
+                {
+                    return BadRequest(new { message = "Senha deve conter pelo menos um caractere especial" });
+                }
+
+                // Verifica se o CPF é válido
+                if (!FinansableAPI.Core.Validations.CpfValidation.IsValid(usuarioDto.CPF))
+                {
+                    return BadRequest(new { message = "CPF inválido" });
+                }
+
+                // Verifica se o email é válido
+                var emailRegex = new System.Text.RegularExpressions.Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+                if (!emailRegex.IsMatch(usuarioDto.Email))
+                {
+                    return BadRequest(new { message = "Email inválido" });
+                }
+
+                await _usuarioService.AddAsync(usuarioDto);
+                return CreatedAtAction(nameof(GetById), new { id = 0 }, usuarioDto);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Erro interno do servidor" });
+            }
         }
 
         [HttpPut("{id}")]

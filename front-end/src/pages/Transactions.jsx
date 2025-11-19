@@ -57,7 +57,8 @@ function Transactions() {
       1: "Transporte",
       2: "Contas",
       3: "Renda",
-      4: "Despesa"
+      4: "Despesa",
+      5: "Meta"
     };
     return categories[tipoCategoria] || "Outros";
   };
