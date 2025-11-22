@@ -10,6 +10,7 @@ import Chatbot from "./components/Chatbot";
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Transactions from "./pages/Transactions";
 import GoalsPage from "./pages/GoalsPage";
+import Reports from "./pages/Reports";
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem('authToken');
@@ -57,6 +58,14 @@ function App() {
             <Header/>
             <div className="pt-20">
               <GoalsPage/>
+            </div>
+            <Footer/>
+          </div>} />
+
+          <Route path="reports" element={<div>
+            <Header/>
+            <div className="pt-20">
+              <Reports/>
             </div>
             <Footer/>
           </div>} />

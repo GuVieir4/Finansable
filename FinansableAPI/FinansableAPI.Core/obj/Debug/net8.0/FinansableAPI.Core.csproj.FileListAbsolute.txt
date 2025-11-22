@@ -55,3 +55,15 @@ C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Core\bin\Debug\net8.0\F
 C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Core\bin\Debug\net8.0\FinansableAPI.Core.dll
 C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Core\bin\Debug\net8.0\FinansableAPI.Core.pdb
 C:\Downloads\FrontFinansable\FinansableAPI\FinansableAPI.Core\obj\Debug\net8.0\ref\FinansableAPI.Core.dll
+C:\Users\Desktop\FrontFinansable\FinansableAPI\FinansableAPI.Core\bin\Debug\net8.0\FinansableAPI.Core.deps.json
+C:\Users\Desktop\FrontFinansable\FinansableAPI\FinansableAPI.Core\bin\Debug\net8.0\FinansableAPI.Core.dll
+C:\Users\Desktop\FrontFinansable\FinansableAPI\FinansableAPI.Core\bin\Debug\net8.0\FinansableAPI.Core.pdb
+C:\Users\Desktop\FrontFinansable\FinansableAPI\FinansableAPI.Core\obj\Debug\net8.0\FinansableAPI.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Desktop\FrontFinansable\FinansableAPI\FinansableAPI.Core\obj\Debug\net8.0\FinansableAPI.Core.AssemblyInfoInputs.cache
+C:\Users\Desktop\FrontFinansable\FinansableAPI\FinansableAPI.Core\obj\Debug\net8.0\FinansableAPI.Core.AssemblyInfo.cs
+C:\Users\Desktop\FrontFinansable\FinansableAPI\FinansableAPI.Core\obj\Debug\net8.0\FinansableAPI.Core.csproj.CoreCompileInputs.cache
+C:\Users\Desktop\FrontFinansable\FinansableAPI\FinansableAPI.Core\obj\Debug\net8.0\FinansableAPI.Core.sourcelink.json
+C:\Users\Desktop\FrontFinansable\FinansableAPI\FinansableAPI.Core\obj\Debug\net8.0\FinansableAPI.Core.dll
+C:\Users\Desktop\FrontFinansable\FinansableAPI\FinansableAPI.Core\obj\Debug\net8.0\refint\FinansableAPI.Core.dll
+C:\Users\Desktop\FrontFinansable\FinansableAPI\FinansableAPI.Core\obj\Debug\net8.0\FinansableAPI.Core.pdb
+C:\Users\Desktop\FrontFinansable\FinansableAPI\FinansableAPI.Core\obj\Debug\net8.0\ref\FinansableAPI.Core.dll
