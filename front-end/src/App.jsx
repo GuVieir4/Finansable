@@ -3,7 +3,6 @@ import Dashboard from "./components/Dashboard";
 import Header from "./components/Header";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Plans from './components/Plans'
 import Footer from './components/Footer'
 import Error404 from "./pages/404";
 import Chatbot from "./components/Chatbot";
@@ -27,13 +26,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        <Route path="/plans" element={<div className="flex flex-col min-h-screen">
-          <Header/>
-          <div className="pt-20">
-            <Plans/>
-          </div>
-          <Footer/>
-        </div>} />
 
         <Route path="/chatbot" element={
           <div>

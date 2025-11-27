@@ -7,7 +7,7 @@ namespace FinansableAPI.Application.Interfaces
         Task<PoupancaDTO> GetByIdAsync(int id);
         Task<IEnumerable<PoupancaDTO>> GetAllAsync();
         Task<IEnumerable<PoupancaDTO>> GetByUsuarioIdAsync(int usuarioId);
-        Task AddAsync(CreatePoupancaDTO poupancaDto);
+        Task<PoupancaDTO> AddAsync(CreatePoupancaDTO poupancaDto);
         Task UpdateAsync(UpdatePoupancaDTO poupancaDto);
         Task DeleteAsync(int id);
     }

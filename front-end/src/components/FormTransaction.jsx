@@ -232,20 +232,6 @@ export default function FormTransaction({ onClose, onSuccess, transactionToEdit 
         {errors.data && <p className="text-red-500 text-sm">{errors.data}</p>}
       </div>
 
-      {!isMetaCategory && (
-        <select
-          value={poupancaId}
-          onChange={(event) => setPoupancaId(event.target.value)}
-          className="w-full border rounded-lg p-2"
-        >
-          <option value="">Selecione uma meta (opcional)</option>
-          {goals.map((goal) => (
-            <option key={goal.id} value={goal.id}>
-              {goal.nome} - R$ {goal.valorAtual.toLocaleString('pt-BR')} / R$ {goal.valorAlvo.toLocaleString('pt-BR')}
-            </option>
-          ))}
-        </select>
-      )}
 
       <div className="flex gap-3 mt-6">
         <button

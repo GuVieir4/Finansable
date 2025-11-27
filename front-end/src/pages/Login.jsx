@@ -1,13 +1,20 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { login } from "../api";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  import { useNavigate } from "react-router-dom";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  import { login } from "../api";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  import Toast from "../components/Toast";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
   const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState(null);
   const navigate = useNavigate();
+
+  const showToast = (message, type = "error") => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 5000); // Auto-hide after 5 seconds
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,53 +47,100 @@ export default function Login() {
       }
     } catch (error) {
       console.error("❌ Login failed:", error);
-      setErro("Email ou senha incorretos.");
-      alert("Email ou senha incorretos.");
+      showToast("Email ou senha incorretos.", "error");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="bg-cover bg-center min-h-screen font-display text-gray-100 flex" style={{backgroundImage: 'url(/images/background.jpg)'}}>
-      <div className="flex-1"></div>
-      <div className="w-96 min-h-screen backdrop-blur-md bg-white/10 border-l border-gray-600 p-8 flex flex-col justify-center space-y-8">
-        <div className="text-center">
-          <h1 className="text-[2.53rem] font-bold tracking-tight font-zalando">
-            <span className="text-[#a2e8ae]">Finan</span><span className="text-[#2ba13f]">sable</span>
-          </h1>
-          <p className="mt-4 text-sm text-gray-300">
-            Bem-vindo de volta! Por favor, acesse sua conta.
-          </p>
-        </div>
+    <div className="flex flex-col min-h-screen bg-gray-100">
+      <div className="flex flex-col min-h-screen">
+        <main className="flex flex-1 justify-center items-center px-4 sm:px-10 lg:px-40 py-5">
+          <div className="w-full max-w-md">
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <div className="text-center mb-8">
+                <h1 className="text-3xl font-bold tracking-tight text-[#264533]">
+                  Finansable
+                </h1>
+                <p className="mt-4 text-sm text-gray-600">
+                  Bem-vindo de volta! Por favor, acesse sua conta.
+                </p>
+              </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-4 rounded-md shadow-sm">
-            <div>
-              <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required
-                className="relative block w-full appearance-none rounded-md border border-gray-500 bg-white/20 px-3 py-2 text-white placeholder-gray-300 focus:z-10 focus:border-[#1dc92e] focus:outline-none focus:ring-[#1dc92e] sm:text-sm"/>
-            </div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="block w-full appearance-none rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-[#1dc92e] focus:outline-none focus:ring-1 focus:ring-[#1dc92e] sm:text-sm"
+                      placeholder="seu@email.com"
+                    />
+                  </div>
 
-            <div>
-              <input type="password" id="password" name="password" value={senha} onChange={(e) => setSenha(e.target.value)} placeholder="Senha" required
-                className="relative block w-full appearance-none rounded-md border border-gray-500 bg-white/20 px-3 py-2 text-white placeholder-gray-300 focus:z-10 focus:border-[#1dc92e] focus:outline-none focus:ring-[#1dc92e] sm:text-sm"/>
+                  <div>
+                    <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                      Senha
+                    </label>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      value={senha}
+                      onChange={(e) => setSenha(e.target.value)}
+                      required
+                      className="block w-full appearance-none rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-[#1dc92e] focus:outline-none focus:ring-1 focus:ring-[#1dc92e] sm:text-sm"
+                      placeholder="••••••••"
+                    />
+                  </div>
+                </div>
+
+                {erro && (
+                  <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                    {erro}
+                  </div>
+                )}
+
+                <div>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="group relative flex w-full justify-center rounded-lg border border-transparent bg-[#1dc92e] py-3 px-4 text-sm font-semibold text-white hover:bg-[#1dc92e]/90 focus:outline-none focus:ring-2 focus:ring-[#1dc92e] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    {loading ? "Entrando..." : "Fazer Login"}
+                  </button>
+                </div>
+              </form>
+
+              <p className="text-center text-sm text-gray-600 mt-6">
+                Não tem uma conta?
+                <button
+                  className="font-medium text-[#1dc92e] hover:text-[#1dc92e]/80 ml-1 transition-colors"
+                  onClick={() => navigate("/register")}
+                >
+                  Criar conta
+                </button>
+              </p>
             </div>
           </div>
-
-          <div>
-            <button type="submit" className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#1dc92e] py-2 px-4 text-sm font-bold text-black hover:bg-[#1dc92e]/90 focus:outline-none focus:ring-2 focus:ring-[#1dc92e] focus:ring-offset-0">
-              Fazer Login
-            </button>
-          </div>
-        </form>
-
-        <p className="text-center text-sm text-gray-300">
-          Não tem uma conta?
-          <a className="font-medium text-[#1dc92e] hover:text-[#1dc92e]/80 cursor-pointer" onClick={() => navigate("/register")}>
-            {" "} Criar conta
-          </a>
-        </p>
+        </main>
       </div>
+
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 }

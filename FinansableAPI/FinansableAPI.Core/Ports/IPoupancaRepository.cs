@@ -7,7 +7,7 @@ namespace FinansableAPI.Core.Ports
         Task<Poupanca> GetByIdAsync(int id);
         Task<IEnumerable<Poupanca>> GetAllAsync();
         Task<IEnumerable<Poupanca>> GetByUsuarioIdAsync(int usuarioId);
-        Task AddAsync(Poupanca poupanca);
+        Task<Poupanca> AddAsync(Poupanca poupanca);
         Task UpdateAsync(Poupanca poupanca);
         Task DeleteAsync(int id);
     }

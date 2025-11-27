@@ -11,6 +11,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [hovered, setHovered] = useState("");
+  const [userType, setUserType] = useState(1); // Default to basic user
   const profileRef = useRef(null);
   const location = useLocation();
 
@@ -31,6 +32,17 @@ export default function Header() {
   }
 
   useEffect(() => {
+    // Get user type from localStorage
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      try {
+        const user = JSON.parse(userData);
+        setUserType(parseInt(user.TipoUsuario));
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+      }
+    }
+
     function handleClickOutside(event) {
       if (profileRef.current && !profileRef.current.contains(event.target)) {
         setProfileOpen(false);
@@ -40,14 +52,25 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const links = [
-    ["Dashboard", "/"],
-    ["Chatbot", "/chatbot"],
-    ["Transações", "/transactions"],
-    ["Metas", "/goals"],
-    ["Relatórios", "/reports"],
-    ["Planos", "/plans"],
-  ];
+  const getFilteredLinks = () => {
+    const allLinks = [
+      ["Dashboard", "/"],
+      ["Chatbot", "/chatbot", 2], // Only for premium users (tipoUsuario = 2)
+      ["Transações", "/transactions"],
+      ["Metas", "/goals"],
+      ["Relatórios", "/reports", 2], // Only for premium users (tipoUsuario = 2)
+    ];
+
+    return allLinks.filter(link => {
+      // If link has a required user type (third element), check if user meets requirement
+      if (link[2] && userType !== link[2]) {
+        return false;
+      }
+      return true;
+    }).map(link => [link[0], link[1]]);
+  };
+
+  const links = getFilteredLinks();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between border-b border-[#000000]/20 px-6 py-3 md:px-10 bg-white shadow-sm">
@@ -129,7 +152,7 @@ export default function Header() {
             className="rounded-full size-10 bg-center bg-cover ring-2 ring-[#264533]/20 hover:ring-[#2d6a4f] transition-all"
             style={{
               backgroundImage:
-                'url("https://avatars.githubusercontent.com/u/160288170?v=4")',
+                'url("https://pixabay.com/vectors/blank-profile-picture-mystery-man-973460/")',
             }}
           ></motion.button>
 
@@ -172,13 +195,9 @@ export default function Header() {
         <div className="w-10 h-[4px] bg-gray-300 rounded-full mx-auto mb-4" />
 
         <div className="flex flex-col items-center gap-2 mb-5">
-          <div
-            className="rounded-full size-16 bg-center bg-cover"
-            style={{
-              backgroundImage:
-                'url("https://avatars.githubusercontent.com/u/160288170?v=4")',
-            }}
-          ></div>
+          <div className="rounded-full size-16 bg-center bg-cover">
+            <i className="fa-regular circle-user"></i>
+          </div>
           <div className="flex flex-wrap justify-center gap-3 mt-2">
             <button className="flex items-center gap-2 px-3 py-1 text-[#264533] bg-[#f0fdf4] rounded-lg hover:bg-[#e4f6eb] transition-all text-sm">
               <User className="w-4 h-4 text-[#2d6a4f]" /> Perfil

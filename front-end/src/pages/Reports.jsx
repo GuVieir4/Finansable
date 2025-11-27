@@ -10,6 +10,7 @@ function Reports() {
   const [typeFilter, setTypeFilter] = useState("all"); // "all", "income", "expense"
   const [pageSize, setPageSize] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isPremium, setIsPremium] = useState(false);
 
   const fetchTransactions = async () => {
     const userId = localStorage.getItem('userId');
@@ -43,6 +44,18 @@ function Reports() {
   };
 
   useEffect(() => {
+    // Check user type
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      try {
+        const user = JSON.parse(userData);
+        setIsPremium(parseInt(user.TipoUsuario) === 2);
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+        setIsPremium(false);
+      }
+    }
+
     fetchTransactions();
   }, []);
 
@@ -87,6 +100,30 @@ function Reports() {
     };
     return categories[tipoCategoria] || "Outros";
   };
+
+  if (!isPremium) {
+    return (
+      <div className="px-4 md:px-40 flex flex-1 justify-center py-5">
+        <div className="layout-content-container flex flex-col w-full lg:max-w-[960px] flex-1">
+          <div className="flex flex-wrap justify-between gap-3 p-4">
+            <div className="flex min-w-72 flex-col gap-3">
+              <p className="text-[#264533] tracking-light text-[32px] font-bold leading-tight">
+                Acesso Restrito
+              </p>
+              <p className="text-[#264533] text-lg">
+                Esta funcionalidade está disponível apenas para usuários premium.
+              </p>
+              <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <p className="text-yellow-800">
+                  Faça upgrade para o plano premium para acessar relatórios avançados e outras funcionalidades exclusivas.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (

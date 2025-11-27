@@ -49,8 +49,8 @@ namespace FinansableAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreatePoupancaDTO poupancaDto)
         {
-            await _poupancaService.AddAsync(poupancaDto);
-            return CreatedAtAction(nameof(GetById), new { id = 0 }, poupancaDto);
+            var createdPoupanca = await _poupancaService.AddAsync(poupancaDto);
+            return CreatedAtAction(nameof(GetById), new { id = createdPoupanca.Id }, createdPoupanca);
         }
 
         [HttpPut("{id}")]

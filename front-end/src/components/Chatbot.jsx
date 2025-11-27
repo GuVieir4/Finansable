@@ -5,8 +5,21 @@ function Chatbot() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(true);
   const [usuarioId] = useState(1);
+  const [isPremium, setIsPremium] = useState(false);
 
   useEffect(() => {
+    // Check user type
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      try {
+        const user = JSON.parse(userData);
+        setIsPremium(parseInt(user.TipoUsuario) === 2);
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+        setIsPremium(false);
+      }
+    }
+
     async function fetchMensagens() {
       try {
         const response = await fetch(`https://localhost:5001/api/mensagem/${usuarioId}`);
@@ -61,6 +74,26 @@ function Chatbot() {
       console.error("Erro:", error);
     }
   };
+
+  if (!isPremium) {
+    return (
+      <div className="flex flex-col min-h-screen bg-[#E8F5E9] items-center justify-center">
+        <div className="text-center p-8">
+          <h1 className="text-[#264533] text-[32px] font-bold mb-4">
+            Acesso Restrito
+          </h1>
+          <p className="text-[#264533] text-lg mb-6">
+            Esta funcionalidade está disponível apenas para usuários premium.
+          </p>
+          <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg max-w-md">
+            <p className="text-yellow-800">
+              Faça upgrade para o plano premium para acessar o chatbot com IA e outras funcionalidades exclusivas.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-[#E8F5E9]">

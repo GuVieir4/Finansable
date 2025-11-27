@@ -65,7 +65,7 @@ namespace FinansableAPI.Application.Services
             });
         }
 
-        public async Task AddAsync(CreatePoupancaDTO poupancaDto)
+        public async Task<PoupancaDTO> AddAsync(CreatePoupancaDTO poupancaDto)
         {
             var poupanca = new Poupanca
             {
@@ -76,7 +76,17 @@ namespace FinansableAPI.Application.Services
                 DataFim = poupancaDto.DataFim,
                 UsuarioId = poupancaDto.UsuarioId
             };
-            await _poupancaRepository.AddAsync(poupanca);
+            var addedPoupanca = await _poupancaRepository.AddAsync(poupanca);
+            return new PoupancaDTO
+            {
+                Id = addedPoupanca.Id,
+                Nome = addedPoupanca.Nome,
+                ValorAlvo = addedPoupanca.ValorAlvo,
+                ValorAtual = addedPoupanca.ValorAtual,
+                DataInicio = addedPoupanca.DataInicio,
+                DataFim = addedPoupanca.DataFim,
+                UsuarioId = addedPoupanca.UsuarioId
+            };
         }
 
         public async Task UpdateAsync(UpdatePoupancaDTO poupancaDto)

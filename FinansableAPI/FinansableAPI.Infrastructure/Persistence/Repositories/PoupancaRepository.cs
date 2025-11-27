@@ -28,10 +28,11 @@ namespace FinansableAPI.Infrastructure.Persistence.Repositories
             return await _context.Poupancas.Where(p => p.UsuarioId == usuarioId).ToListAsync();
         }
 
-        public async Task AddAsync(Poupanca poupanca)
+        public async Task<Poupanca> AddAsync(Poupanca poupanca)
         {
             await _context.Poupancas.AddAsync(poupanca);
             await _context.SaveChangesAsync();
+            return poupanca;
         }
 
         public async Task UpdateAsync(Poupanca poupanca)
