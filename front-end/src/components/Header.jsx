@@ -37,7 +37,9 @@ export default function Header() {
     if (userData) {
       try {
         const user = JSON.parse(userData);
-        setUserType(parseInt(user.TipoUsuario));
+        const tipo = parseInt(user.tipoUsuario || user.TipoUsuario);
+        setUserType(tipo);
+        console.log('userType set to:', tipo);
       } catch (error) {
         console.error('Error parsing user data:', error);
       }
