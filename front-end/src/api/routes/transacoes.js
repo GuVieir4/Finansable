@@ -19,24 +19,6 @@ api.interceptors.request.use(
   }
 );
 
-export const login = async (email, senha) => {
-  console.log("🔍 API_BASE_URL:", import.meta.env.VITE_API_BASE_URL);
-  console.log("🔍 Login attempt:", { email, senha });
-  try {
-    const { data } = await api.post("/api/Usuarios/login", { email, senha });
-    console.log("✅ Login success:", data);
-    return data;
-  } catch (error) {
-    console.error("❌ Login error:", error.response?.data || error.message);
-    throw error;
-  }
-};
-
-export const createUser = async (userData) => {
-  const { data } = await api.post("/api/Usuarios/create", userData);
-  return data;
-};
-
 export const getTransactions = async (userId) => {
   const { data } = await api.get(`/api/Transacoes/usuario/${userId}`);
   return data;
@@ -44,25 +26,6 @@ export const getTransactions = async (userId) => {
 
 export const getDashboardData = async (userId) => {
   const { data } = await api.get(`/api/Transacoes/dashboard/${userId}`);
-  return data;
-};
-
-export const getGoals = async (userId) => {
-  const { data } = await api.get(`/api/Poupancas/usuario/${userId}`);
-  return data;
-};
-
-export const createGoal = async (goalData) => {
-  const { data } = await api.post("/api/Poupancas", goalData);
-  return data;
-};
-
-export const deleteGoal = async (id) => {
-  await api.delete(`/api/Poupancas/${id}`);
-};
-
-export const updateGoal = async (id, goalData) => {
-  const { data } = await api.put(`/api/Poupancas/${id}`, goalData);
   return data;
 };
 

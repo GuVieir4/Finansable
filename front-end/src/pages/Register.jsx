@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { createUser } from "../api";
+import { useNavigate } from "react-router-dom";
+import { createUser } from "../api/routes/usuario";
 import Modal from "../components/Modal";
 
 export default function Register() {

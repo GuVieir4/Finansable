@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getTransactions } from "../api";
+import { getTransactions } from "../api/routes/transacoes";
 import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
 const colors = {

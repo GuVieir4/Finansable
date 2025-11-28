@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import GoalsProgress from '../components/GoalsProgress'
 import NewGoalButton from "../components/NewGoalButton";
-import { getGoals } from "../api";
+import { getGoals } from "../api/routes/poupancas";
 
 function GoalsPage() {
   const [goals, setGoals] = useState([]);

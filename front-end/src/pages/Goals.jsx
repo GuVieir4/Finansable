@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { PlusCircle, CalendarDays, Pencil, Trash2 } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import Modal from "../components/Modal";
-import { getGoals, createGoal, deleteGoal, updateGoal } from "../api";
+import { getGoals, createGoal, deleteGoal, updateGoal } from "../api/routes/usuario";
 import Toast from "../components/Toast";
 
 function Goals() {

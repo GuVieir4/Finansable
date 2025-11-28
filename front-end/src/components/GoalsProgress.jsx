@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { getGoals, deleteGoal, updateGoal } from '../api';
+import { getGoals, deleteGoal, updateGoal } from '../api/routes/poupancas';
 import { CalendarDays, Pencil, Trash2, Check, X } from "lucide-react";
-import NewGoalButton from './NewGoalButton';
 import { useLocation, useNavigate } from "react-router-dom";
 import Toast from './Toast';
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Modal from "./Modal";
-import { createGoal } from "../api";
+import { createGoal } from "../api/routes/poupancas";
 import { Plus } from "lucide-react";
 import Toast from "./Toast";
 

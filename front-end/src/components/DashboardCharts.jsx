@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { getTransactions } from "../api";
+import { useState, useEffect } from "react";
+import { getTransactions } from "../api/routes/transacoes";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid, LineChart, Line } from "recharts";
 
 function DashboardCharts() {

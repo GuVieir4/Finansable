@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { createTransaction, updateTransaction, getGoals } from "../api";
+import { useState, useEffect } from "react";
+import { createTransaction, updateTransaction } from "../api/routes/transacoes";
+import { getGoals } from "../api/routes/poupancas";
 
 export default function FormTransaction({ onClose, onSuccess, transactionToEdit }) {
   const [categoria, setCategoria] = useState("");

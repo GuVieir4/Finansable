@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import Header from "./Header";
 import FinancialSummary from "./FinancialSummary";
@@ -6,9 +6,8 @@ import TransactionsTable from "./TransactionsTable";
 import GoalsProgress from "./GoalsProgress";
 import DashboardCharts from "./DashboardCharts";
 import Footer from './Footer'
-import Modal from "./Modal";
 import FormTransaction from "./FormTransaction"
-import { getTransactions } from "../api";
+import { getTransactions } from "../api/routes/transacoes";
 
 function Dashboard() {
   const [openModal, setOpenModal] = useState(false);

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { getTransactions, getGoals } from "../api";
+import { useState, useEffect } from "react";
+import { getTransactions } from "../api/routes/transacoes";
+import { getGoals } from "../api/routes/poupancas";
 
 function FinancialSummary() {
   const [dashboardData, setDashboardData] = useState(null);

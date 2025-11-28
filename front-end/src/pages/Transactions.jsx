@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { getTransactions, getDashboardData, deleteTransaction, getGoals } from "../api";
-import Modal from "../components/Modal";
+import { useState, useEffect } from "react";
+import { getTransactions, getDashboardData, deleteTransaction } from "../api/routes/transacoes";
+import { getGoals } from "../api/routes/poupancas";
 import FormTransaction from "../components/FormTransaction";
 import { Pencil, Trash2 } from "lucide-react";
 import Toast from "../components/Toast";
