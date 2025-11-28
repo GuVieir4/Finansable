@@ -26,12 +26,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-
         <Route path="/chatbot" element={
           <div>
             <Header/>
             <div className="pt-20">
-              <Chatbot/>
+              <Chatbot isFloating={false}/>
             </div>
           </div>
         } />

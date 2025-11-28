@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getTransactions, getDashboardData, deleteTransaction } from "../api";
+import { getTransactions, getDashboardData, deleteTransaction, getGoals } from "../api";
 import Modal from "../components/Modal";
 import FormTransaction from "../components/FormTransaction";
 import { Pencil, Trash2 } from "lucide-react";
@@ -19,9 +19,10 @@ function Transactions() {
     if (!userId) return;
 
     try {
-      const [transData, dashData] = await Promise.all([
+      const [transData, dashData, goalsData] = await Promise.all([
         getTransactions(userId),
-        getDashboardData(userId)
+        getDashboardData(userId),
+        getGoals(userId)
       ]);
 
       setRawTransactions(transData);
@@ -37,8 +38,19 @@ function Transactions() {
       const entradas = transData.filter(t => t.tipoMovimentacao === 1).reduce((sum, t) => sum + (t.valor || 0), 0);
       const saidas = transData.filter(t => t.tipoMovimentacao === 0).reduce((sum, t) => sum + (t.valor || 0), 0);
 
+      // Saldo Líquido: entradas e saídas excluindo metas (tipoCategoria !== 5)
+      const entradasLiquido = transData.filter(t => t.tipoMovimentacao === 1 && t.tipoCategoria !== 5).reduce((sum, t) => sum + (t.valor || 0), 0);
+      const saidasLiquido = transData.filter(t => t.tipoMovimentacao === 0 && t.tipoCategoria !== 5).reduce((sum, t) => sum + (t.valor || 0), 0);
+      const saldoLiquido = entradasLiquido - saidasLiquido;
+
+      // Poupado: soma dos valores atuais das metas
+      const poupado = goalsData.reduce((sum, g) => sum + (g.valorAtual || 0), 0);
+
+      // Patrimônio: saldo líquido + poupado
+      const patrimonio = saldoLiquido + poupado;
+
       setTransactions(formattedTransactions);
-      setDashboardData({ ...dashData, Entradas: entradas, Saidas: saidas });
+      setDashboardData({ ...dashData, Entradas: entradas, Saidas: saidas, saldoLiquido, poupado, patrimonio });
       setCurrentPage(1); // Reset to first page
     } catch (error) {
       console.error("Erro ao buscar dados:", error);
@@ -140,22 +152,18 @@ function Transactions() {
         <h2 className="text-[#264533] text-[22px] font-bold px-4 pb-3 pt-5">
           Resumo
         </h2>
-        <div className="flex flex-col md:flex-row gap-4 p-4">
-          <div className="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 border border-[#366348] bg-[#4CAF50]">
-            <p className="text-white text-base font-medium leading-normal">
-              Receitas
-            </p>
-            <p className="text-white tracking-light text-2xl font-bold leading-tight">
-              R$ {(dashboardData?.Entradas || 0).toFixed(2).replace('.', ',')}
-            </p>
+        <div className="flex flex-col sm:flex-row gap-4 p-4">
+          <div className="flex flex-1 flex-col gap-2 rounded-lg p-6 bg-gradient-to-br from-green-400/30 to-green-600/30 backdrop-blur-md border border-green-400/50 shadow-lg hover:scale-105 hover:brightness-110 transition-all duration-300 cursor-pointer">
+            <p className="text-[#131711] text-base font-medium leading-normal">Saldo Líquido</p>
+            <p className="text-[#131711] tracking-light text-2xl font-bold leading-tight">R$ {(dashboardData?.saldoLiquido || 0).toFixed(2).replace('.', ',')}</p>
           </div>
-          <div className="flex min-w-[158px] flex-1 flex-col gap-2 rounded-lg p-6 border border-[#366348] bg-[#cc4444]">
-            <p className="text-white text-base font-medium leading-normal">
-              Despesas
-            </p>
-            <p className="text-white tracking-light text-2xl font-bold leading-tight">
-              R$ {(dashboardData?.Saidas || 0).toFixed(2).replace('.', ',')}
-            </p>
+          <div className="flex flex-1 flex-col gap-2 rounded-lg p-6 bg-gradient-to-br from-blue-400/30 to-blue-600/30 backdrop-blur-md border border-blue-400/50 shadow-lg hover:scale-105 hover:brightness-110 transition-all duration-300 cursor-pointer">
+            <p className="text-[#131711] text-base font-medium leading-normal">Poupado</p>
+            <p className="text-[#131711] tracking-light text-2xl font-bold leading-tight">R$ {(dashboardData?.poupado || 0).toFixed(2).replace('.', ',')}</p>
+          </div>
+          <div className="flex flex-1 flex-col gap-2 rounded-lg p-6 bg-gradient-to-br from-purple-400/30 to-purple-600/30 backdrop-blur-md border border-purple-400/50 shadow-lg hover:scale-105 hover:brightness-110 transition-all duration-300 cursor-pointer">
+            <p className="text-[#131711] text-base font-medium leading-normal">Patrimônio</p>
+            <p className="text-[#131711] tracking-light text-2xl font-bold leading-tight">R$ {(dashboardData?.patrimonio || 0).toFixed(2).replace('.', ',')}</p>
           </div>
         </div>
         <h2 className="text-[#264533] text-[22px] font-bold px-4 pb-3 pt-5">

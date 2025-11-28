@@ -20,12 +20,12 @@ namespace FinansableAPI.Infrastructure.Persistence.Repositories
 
         public async Task<IEnumerable<Transacao>> GetAllAsync()
         {
-            return await _context.Transacoes.ToListAsync();
+            return await _context.Transacoes.OrderByDescending(t => t.Data).ToListAsync();
         }
 
         public async Task<IEnumerable<Transacao>> GetByUsuarioIdAsync(int usuarioId)
         {
-            return await _context.Transacoes.Where(t => t.UsuarioId == usuarioId).ToListAsync();
+            return await _context.Transacoes.Where(t => t.UsuarioId == usuarioId).OrderByDescending(t => t.Data).ToListAsync();
         }
 
         public async Task AddAsync(Transacao transacao)

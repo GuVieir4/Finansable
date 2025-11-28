@@ -173,3 +173,6 @@ dist-ssr
 *.sln
 *.sw?
 
+# Python virtual environments
+groq-service/venv/
+

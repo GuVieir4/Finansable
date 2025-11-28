@@ -8,7 +8,7 @@ import DashboardCharts from "./DashboardCharts";
 import Footer from './Footer'
 import Modal from "./Modal";
 import FormTransaction from "./FormTransaction"
-import { getGoals } from "../api";
+import { getTransactions } from "../api";
 
 function Dashboard() {
   const [openModal, setOpenModal] = useState(false);
@@ -17,13 +17,13 @@ function Dashboard() {
 
   const getHappinessInfo = (level) => {
     const messages = [
-      "Jarbas está muito triste! Que tal começar a trabalhar nas suas metas?",
-      "Jarbas está triste. Vamos melhorar isso completando algumas metas!",
-      "Jarbas não está muito feliz. Continue trabalhando nas suas metas!",
-      "Jarbas está neutro. Mantenha o foco nas suas metas!",
-      "Jarbas está feliz! Você está progredindo bem!",
-      "Jarbas está muito feliz! Continue assim!",
-      "Jarbas está super feliz! Parabéns pelas metas concluídas!"
+      "Jarbas está muito triste! Você está gastando mais do que ganha.",
+      "Jarbas está triste. Sua taxa de poupança é baixa.",
+      "Jarbas não está muito feliz. Poupe mais!",
+      "Jarbas está neutro. Taxa de poupança razoável.",
+      "Jarbas está feliz! Boa taxa de poupança!",
+      "Jarbas está muito feliz! Excelente poupança!",
+      "Jarbas está super feliz! Você é um mestre da poupança!"
     ];
 
     // Map happiness levels to available images
@@ -48,21 +48,8 @@ function Dashboard() {
     if (!userId) return;
 
     try {
-      const [goals, transactions] = await Promise.all([
-        getGoals(userId),
-        getTransactions(userId)
-      ]);
+      const transactions = await getTransactions(userId);
 
-      // Calculate goals completion
-      let goalsScore = 0;
-      if (goals.length > 0) {
-        const totalTarget = goals.reduce((sum, g) => sum + g.valorAlvo, 0);
-        const totalProgress = goals.reduce((sum, g) => sum + g.valorAtual, 0);
-        const completionRate = totalTarget === 0 ? 0 : (totalProgress / totalTarget);
-        goalsScore = completionRate;
-      }
-
-      // Calculate financial health
       const totalIncome = transactions
         .filter(t => t.tipoMovimentacao === 1)
         .reduce((sum, t) => sum + (t.valor || 0), 0);
@@ -72,24 +59,13 @@ function Dashboard() {
       const balance = totalIncome - totalExpenses;
       const savingsRate = totalIncome > 0 ? (balance / totalIncome) : 0;
 
-      // Activity score based on number of transactions
-      const activityScore = Math.min(transactions.length / 50, 1); // Max at 50 transactions
-
-      // Overall score (weighted)
-      const overallScore = (
-        goalsScore * 0.4 +      // 40% goals
-        savingsRate * 0.3 +     // 30% savings rate
-        activityScore * 0.2 +   // 20% activity
-        (balance > 0 ? 0.1 : 0) // 10% positive balance
-      );
-
       let happiness = 3;
-      if (overallScore <= 0.15) happiness = 0;
-      else if (overallScore <= 0.30) happiness = 1;
-      else if (overallScore <= 0.45) happiness = 2;
-      else if (overallScore <= 0.60) happiness = 3;
-      else if (overallScore <= 0.75) happiness = 4;
-      else if (overallScore < 0.9) happiness = 5;
+      if (savingsRate < 0) happiness = 0;
+      else if (savingsRate < 0.1) happiness = 1;
+      else if (savingsRate < 0.2) happiness = 2;
+      else if (savingsRate < 0.3) happiness = 3;
+      else if (savingsRate < 0.4) happiness = 4;
+      else if (savingsRate < 0.5) happiness = 5;
       else happiness = 6;
 
       setHappinessLevel(happiness);
@@ -102,14 +78,14 @@ function Dashboard() {
   useEffect(() => {
     calculateHappiness();
 
-    const handleGoalsUpdated = () => {
+    const handleTransactionUpdated = () => {
       calculateHappiness();
     };
 
-    window.addEventListener('goalsUpdated', handleGoalsUpdated);
+    window.addEventListener('transactionAdded', handleTransactionUpdated);
 
     return () => {
-      window.removeEventListener('goalsUpdated', handleGoalsUpdated);
+      window.removeEventListener('transactionAdded', handleTransactionUpdated);
     };
   }, []);
 
