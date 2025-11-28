@@ -2,6 +2,7 @@ import { useState } from "react";
 import Modal from "./Modal";
 import { createGoal } from "../api";
 import { Plus } from "lucide-react";
+import Toast from "./Toast";
 
 function NewGoalButton({ onGoalCreated }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,12 +12,18 @@ function NewGoalButton({ onGoalCreated }) {
     valorAtual: '',
     dataFim: ''
   });
+  const [toast, setToast] = useState(null);
+
+  const showToast = (message, type = "error") => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 5000);
+  };
 
   const handleCreateGoal = async (e) => {
     e.preventDefault();
     const userId = localStorage.getItem('userId');
     if (!userId) {
-      alert('Usuário não autenticado.');
+      showToast('Usuário não autenticado.', 'error');
       return;
     }
     try {
@@ -38,7 +45,7 @@ function NewGoalButton({ onGoalCreated }) {
       
     } catch (error) {
       console.error("Erro ao criar meta:", error);
-      alert(`Não foi possível criar a meta: ${error.message}`);
+      showToast(`Não foi possível criar a meta: ${error.message}`, "error");
     }
   };
 
@@ -104,6 +111,13 @@ function NewGoalButton({ onGoalCreated }) {
           </div>
         </form>
       </Modal>
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 }

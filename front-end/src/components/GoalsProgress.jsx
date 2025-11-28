@@ -3,6 +3,7 @@ import { getGoals, deleteGoal, updateGoal } from '../api';
 import { CalendarDays, Pencil, Trash2, Check, X } from "lucide-react";
 import NewGoalButton from './NewGoalButton';
 import { useLocation, useNavigate } from "react-router-dom";
+import Toast from './Toast';
 
 function GoalsProgress() {
   const [goals, setGoals] = useState([]);
@@ -10,6 +11,8 @@ function GoalsProgress() {
   const [error, setError] = useState(null);
   const [editingGoalId, setEditingGoalId] = useState(null);
   const [editForm, setEditForm] = useState({ nome: '', valorAtual: '', valorAlvo: '', dataFim: '' });
+  const [toast, setToast] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState({ show: false, id: null });
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -68,18 +71,26 @@ function GoalsProgress() {
     return () => window.removeEventListener('goalCreated', handleGoalCreated);
   }, []);
 
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Tem certeza que deseja excluir esta meta?");
+  const showToast = (message, type = "error") => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 5000);
+  };
 
-    if (confirmDelete) {
-      try {
-        await deleteGoal(id);
-        setGoals((prev) => prev.filter((goal) => goal.id !== id));
-      } catch (error) {
-        console.error("Erro ao excluir meta:", error);
-        alert(`Não foi possível excluir a meta: ${error.message}`);
-      }
+  const handleConfirmDelete = async () => {
+    if (!confirmDelete.id) return;
+    try {
+      await deleteGoal(confirmDelete.id);
+      setGoals((prev) => prev.filter((goal) => goal.id !== confirmDelete.id));
+      setConfirmDelete({ show: false, id: null });
+    } catch (error) {
+      console.error("Erro ao excluir meta:", error);
+      showToast(`Não foi possível excluir a meta: ${error.message}`, "error");
+      setConfirmDelete({ show: false, id: null });
     }
+  };
+
+  const handleDelete = (id) => {
+    setConfirmDelete({ show: true, id });
   };
 
   const handleGoalCreated = (createdGoal) => {
@@ -137,7 +148,7 @@ function GoalsProgress() {
       window.dispatchEvent(new CustomEvent('goalsUpdated'));
     } catch (error) {
       console.error("Erro ao editar meta:", error);
-      alert("Erro ao editar meta. Tente novamente.");
+      showToast("Erro ao editar meta. Tente novamente.", "error");
     }
   };
 
@@ -291,6 +302,43 @@ function GoalsProgress() {
         });
         })()}
       </div>
+      {confirmDelete.show && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white p-6 rounded-2xl shadow-xl w-full max-w-md mx-4">
+            <div className="flex justify-between items-center border-b pb-3 mb-4">
+              <h2 className="text-[#264533] text-xl font-bold">Confirmar Exclusão</h2>
+              <button
+                onClick={() => setConfirmDelete({ show: false, id: null })}
+                className="text-[#366348] hover:text-[#264533]"
+              >
+                ✕
+              </button>
+            </div>
+            <p className="text-[#264533] mb-6">Tem certeza que deseja excluir esta meta? Esta ação não pode ser desfeita.</p>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => setConfirmDelete({ show: false, id: null })}
+                className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleConfirmDelete}
+                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+              >
+                Excluir
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </section>
   );
 }

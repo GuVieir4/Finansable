@@ -200,7 +200,7 @@ function Chatbot({ isFloating = true }) {
               {loading ? (
                 <p className="text-[#264532] text-center">Carregando mensagens...</p>
               ) : (
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 pb-4">
                   {messages.map((message, i) => (
                     <div
                       key={i}
@@ -318,7 +318,7 @@ function Chatbot({ isFloating = true }) {
           {loading ? (
             <p className="text-[#264532] text-center mt-10">Carregando mensagens...</p>
           ) : (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 pb-20">
               {messages.map((message, i) => (
                 <div
                   key={i}

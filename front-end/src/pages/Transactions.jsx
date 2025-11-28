@@ -3,6 +3,7 @@ import { getTransactions, getDashboardData, deleteTransaction, getGoals } from "
 import Modal from "../components/Modal";
 import FormTransaction from "../components/FormTransaction";
 import { Pencil, Trash2 } from "lucide-react";
+import Toast from "../components/Toast";
 
 function Transactions() {
   const [transactions, setTransactions] = useState([]);
@@ -13,6 +14,26 @@ function Transactions() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState(null);
   const [rawTransactions, setRawTransactions] = useState([]);
+  const [toast, setToast] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState({ show: false, id: null });
+
+  const showToast = (message, type = "error") => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 5000);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!confirmDelete.id) return;
+    try {
+      await deleteTransaction(confirmDelete.id);
+      fetchData(); // Refresh data
+      setConfirmDelete({ show: false, id: null });
+    } catch (error) {
+      console.error("Erro ao excluir transação:", error);
+      showToast("Erro ao excluir transação. Tente novamente.", "error");
+      setConfirmDelete({ show: false, id: null });
+    }
+  };
 
   const fetchData = async () => {
     const userId = localStorage.getItem('userId');
@@ -80,17 +101,8 @@ function Transactions() {
     setIsModalOpen(true);
   };
 
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Tem certeza que deseja excluir esta transação?");
-    if (confirmDelete) {
-      try {
-        await deleteTransaction(id);
-        fetchData(); // Refresh data
-      } catch (error) {
-        console.error("Erro ao excluir transação:", error);
-        alert("Erro ao excluir transação. Tente novamente.");
-      }
-    }
+  const handleDelete = (id) => {
+    setConfirmDelete({ show: true, id });
   };
 
   const totalPages = Math.ceil(transactions.length / pageSize) || 1;
@@ -289,6 +301,43 @@ function Transactions() {
             />
           </div>
         </div>
+      )}
+      {confirmDelete.show && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white p-6 rounded-2xl shadow-xl w-full max-w-md mx-4">
+            <div className="flex justify-between items-center border-b pb-3 mb-4">
+              <h2 className="text-[#264533] text-xl font-bold">Confirmar Exclusão</h2>
+              <button
+                onClick={() => setConfirmDelete({ show: false, id: null })}
+                className="text-[#366348] hover:text-[#264533]"
+              >
+                ✕
+              </button>
+            </div>
+            <p className="text-[#264533] mb-6">Tem certeza que deseja excluir esta transação? Esta ação não pode ser desfeita.</p>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => setConfirmDelete({ show: false, id: null })}
+                className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleConfirmDelete}
+                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+              >
+                Excluir
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
       )}
     </div>
   );

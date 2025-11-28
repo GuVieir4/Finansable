@@ -3,6 +3,7 @@ import { PlusCircle, CalendarDays, Pencil, Trash2 } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import Modal from "../components/Modal";
 import { getGoals, createGoal, deleteGoal, updateGoal } from "../api";
+import Toast from "../components/Toast";
 
 function Goals() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,6 +12,29 @@ function Goals() {
   const [goals, setGoals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [toast, setToast] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState({ show: false, index: null });
+
+  const showToast = (message, type = "error") => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 5000);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (confirmDelete.index === null) return;
+    try {
+      const goalId = goals[confirmDelete.index].id;
+      await deleteGoal(goalId);
+      setGoals((prev) => prev.filter((_, i) => i !== confirmDelete.index));
+      setConfirmDelete({ show: false, index: null });
+      // Notify dashboard to recalculate happiness
+      window.dispatchEvent(new CustomEvent('goalsUpdated'));
+    } catch (error) {
+      console.error("Erro ao excluir meta:", error);
+      showToast("Erro ao excluir meta. Tente novamente.", "error");
+      setConfirmDelete({ show: false, index: null });
+    }
+  };
 
   useEffect(() => {
     const fetchGoals = async () => {
@@ -62,7 +86,7 @@ function Goals() {
     e.preventDefault();
     const parsedTarget = parseFloat(String(newTarget).replace(",", "."));
     if (!newTitle.trim() || !parsedTarget || parsedTarget <= 0 || !newDeadline.trim()) {
-      alert("Preencha todos os campos corretamente!");
+      showToast("Preencha todos os campos corretamente!", "error");
       return;
     }
 
@@ -94,7 +118,7 @@ function Goals() {
       window.dispatchEvent(new CustomEvent('goalsUpdated'));
     } catch (error) {
       console.error("Erro ao criar meta:", error);
-      alert("Erro ao criar meta. Tente novamente.");
+      showToast("Erro ao criar meta. Tente novamente.", "error");
     }
   };
 
@@ -113,7 +137,7 @@ function Goals() {
     const parsedTarget = parseFloat(String(editTarget).replace(",", "."));
     const parsedProgress = parseFloat(String(editProgress).replace(",", "."));
     if (!editTitle.trim() || parsedTarget <= 0 || parsedProgress < 0 || !editDeadline.trim()) {
-      alert("Preencha todos os campos corretamente!");
+      showToast("Preencha todos os campos corretamente!", "error");
       return;
     }
 
@@ -145,24 +169,12 @@ function Goals() {
       window.dispatchEvent(new CustomEvent('goalsUpdated'));
     } catch (error) {
       console.error("Erro ao editar meta:", error);
-      alert("Erro ao editar meta. Tente novamente.");
+      showToast("Erro ao editar meta. Tente novamente.", "error");
     }
   };
 
-  const handleDelete = async (index) => {
-    const confirmDelete = window.confirm("Tem certeza que deseja excluir esta meta?");
-    if (confirmDelete) {
-      try {
-        const goalId = goals[index].id;
-        await deleteGoal(goalId);
-        setGoals((prev) => prev.filter((_, i) => i !== index));
-        // Notify dashboard to recalculate happiness
-        window.dispatchEvent(new CustomEvent('goalsUpdated'));
-      } catch (error) {
-        console.error("Erro ao excluir meta:", error);
-        alert("Erro ao excluir meta. Tente novamente.");
-      }
-    }
+  const handleDelete = (index) => {
+    setConfirmDelete({ show: true, index });
   };
 
   return (
@@ -397,6 +409,43 @@ function Goals() {
           </div>
         </form>
       </Modal>
+      {confirmDelete.show && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white p-6 rounded-2xl shadow-xl w-full max-w-md mx-4">
+            <div className="flex justify-between items-center border-b pb-3 mb-4">
+              <h2 className="text-[#264533] text-xl font-bold">Confirmar Exclusão</h2>
+              <button
+                onClick={() => setConfirmDelete({ show: false, index: null })}
+                className="text-[#366348] hover:text-[#264533]"
+              >
+                ✕
+              </button>
+            </div>
+            <p className="text-[#264533] mb-6">Tem certeza que deseja excluir esta meta? Esta ação não pode ser desfeita.</p>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => setConfirmDelete({ show: false, index: null })}
+                className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleConfirmDelete}
+                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+              >
+                Excluir
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 }
